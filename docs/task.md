@@ -1,11 +1,11 @@
 # DJ Request App - Task List
 
-- [/] **Phase 1: Project Setup & Configuration**
+- [x] **Phase 1: Project Setup & Configuration**
     - [x] Initialize Nuxt project with Nuxt UI
-    - [ ] Install `@nuxtjs/supabase`
-    - [ ] Set up Supabase project and client
-    - [ ] Configure environment variables
-    - [ ] Configure Tailwind theme (Colors, Fonts) from mocks
+    - [x] Install `@nuxtjs/supabase`
+    - [x] Set up Supabase project and client
+    - [x] Configure environment variables
+    - [x] Configure Tailwind theme (Colors, Fonts) from mocks
 
 - [ ] **Phase 2: Database & Authentication**
     - [ ] Design Database Schema (Events, Requests, Feedback)

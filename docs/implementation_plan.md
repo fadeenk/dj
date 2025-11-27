@@ -19,8 +19,8 @@ Build a real-time mobile-first web application that allows event attendees to re
 
 ### 1. Project Setup
 - [x] Initialize Nuxt project.
-- [ ] Install `@nuxtjs/supabase`.
-- [ ] Configure `nuxt.config.ts`:
+- [x] Install `@nuxtjs/supabase`.
+- [x] Configure `nuxt.config.ts`:
     - Add Supabase module.
     - Configure Tailwind theme (colors, fonts).
     - Add Google Fonts (Be Vietnam Pro, Material Symbols).
