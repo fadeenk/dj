@@ -1,0 +1,33 @@
+# DJ Request App - Task List
+
+- [/] **Phase 1: Project Setup & Configuration**
+    - [x] Initialize Nuxt project with Nuxt UI
+    - [ ] Install `@nuxtjs/supabase`
+    - [ ] Set up Supabase project and client
+    - [ ] Configure environment variables
+    - [ ] Configure Tailwind theme (Colors, Fonts) from mocks
+
+- [ ] **Phase 2: Database & Authentication**
+    - [ ] Design Database Schema (Events, Requests, Feedback)
+    - [ ] Implement Anonymous Guest Auth (UUID in localStorage)
+    - [ ] Implement Admin Auth (Email/Password)
+
+- [ ] **Phase 3: Admin Event Management**
+    - [ ] Build Admin Dashboard layout
+    - [ ] Implement Event Management (Create, Edit, Delete Events)
+    - [ ] Generate Event Codes
+
+- [ ] **Phase 4: Song Requests E2E**
+    - [ ] Create Event Landing Page (Guest Join)
+    - [ ] Implement Song Request Form (YouTube Search)
+    - [ ] Build Admin Request Management (View, Update Status)
+    - [ ] Build Live Request Feed (Real-time updates for both)
+
+- [ ] **Phase 5: Feedback & Tip Systems**
+    - [ ] Implement Tip the DJ section
+    - [ ] Implement Feedback/Sentiment system
+
+- [ ] **Phase 6: UI/UX Polish & Deployment**
+    - [ ] Apply Mobile-first responsive design
+    - [ ] Add animations and transitions
+    - [ ] Bug fixes

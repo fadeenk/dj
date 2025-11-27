@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DJ Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#2D9CDB",
+                "secondary": "#F81C9A",
+                "background-light": "#f6f5f8",
+                "background-dark": "#131022",
+              },
+              fontFamily: {
+                "display": ["Be Vietnam Pro", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "1rem",
+                "lg": "1.5rem",
+                "xl": "2rem",
+                "full": "9999px"
+              },
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        .material-symbols-outlined.fill {
+          font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-dark text-white">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-10 flex items-center justify-between bg-background-dark/80 p-4 pb-3 backdrop-blur-sm">
+<h1 class="text-2xl font-bold leading-tight tracking-[-0.015em] text-white">Settings</h1>
+</header>
+<main class="flex flex-1 flex-col gap-6 p-4 pb-28">
+<section>
+<h2 class="mb-3 text-lg font-bold text-white/90">Profile</h2>
+<div class="rounded-lg bg-white/5">
+<a class="flex items-center justify-between p-4 border-b border-white/10" href="#">
+<div class="flex items-center gap-4">
+<div class="relative size-14">
+<img alt="DJ profile picture" class="rounded-full object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1CPRtvYawGCEloh1usgGw7qP5f9DpN3i5mhk2E9_UMu1sUUIrdWsM0p_l_nqLk9LNeXFL1g3OuSYWaUov9SuCfh3gXOhp70Gte3WvbCWtwpDQJodNNuINbbzm2ep57BqhCd-2XWfraZNkidWZTQvEBuUtHaqYbieV03_PsCMuopla5IDvocC0LeyPLNdvwvZKKgkhbXx199z26Vy25AEBClyUgp1tworUjCnsV5joUgNuQyKz2peyqMW1to398ljRGNiLpdGeNbs"/>
+<div class="absolute bottom-0 right-0 flex items-center justify-center size-5 rounded-full bg-primary border-2 border-background-dark">
+<span class="material-symbols-outlined text-xs text-white" style="font-size: 14px;">edit</span>
+</div>
+</div>
+<div>
+<p class="font-bold text-white">DJ Beats</p>
+<p class="text-sm text-white/70">dj.beats@email.com</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-white/70">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl">lock</span>
+<p>Change Password</p>
+</div>
+<span class="material-symbols-outlined text-white/70">chevron_right</span>
+</a>
+</div>
+</section>
+<section>
+<h2 class="mb-3 text-lg font-bold text-white/90">Event Management</h2>
+<div class="rounded-lg bg-white/5">
+<a class="flex items-center justify-between p-4 border-b border-white/10" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl">event</span>
+<p>Manage Event Details</p>
+</div>
+<span class="material-symbols-outlined text-white/70">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl">share</span>
+<p>Sharing &amp; Promotion</p>
+</div>
+<span class="material-symbols-outlined text-white/70">chevron_right</span>
+</a>
+</div>
+</section>
+<section>
+<h2 class="mb-3 text-lg font-bold text-white/90">Preferences</h2>
+<div class="rounded-lg bg-white/5">
+<div class="flex items-center justify-between p-4 border-b border-white/10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl">notifications</span>
+<p>Push Notifications</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-6 w-11 rounded-full bg-white/20 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-primary peer-checked:to-secondary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:border-gray-600 dark:bg-gray-700"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl">request_quote</span>
+<p>Auto-approve Requests</p>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only" type="checkbox" value=""/>
+<div class="peer h-6 w-11 rounded-full bg-white/20 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-gradient-to-r peer-checked:from-primary peer-checked:to-secondary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:border-gray-600 dark:bg-gray-700"></div>
+</label>
+</div>
+</div>
+</section>
+<section>
+<h2 class="mb-3 text-lg font-bold text-white/90">Tips &amp; Payments</h2>
+<div class="rounded-lg bg-white/5 p-4 flex flex-col items-center text-center gap-3">
+<span class="material-symbols-outlined text-secondary text-4xl">account_balance_wallet</span>
+<p class="text-white/70">Link your payment account to start receiving tips from event attendees.</p>
+<button class="w-full mt-2 rounded-full bg-gradient-to-r from-primary to-secondary py-3 px-6 text-base font-bold text-white shadow-[0_4px_15px_rgba(0,0,0,0.2),0_0_15px_rgba(45,156,219,0.5),0_0_15px_rgba(248,28,154,0.4)]">
+                    Link Payment Account
+                </button>
+</div>
+</section>
+<button class="w-full mt-4 rounded-full bg-white/10 py-3 px-6 text-base font-bold text-secondary">
+            Log Out
+        </button>
+</main>
+<nav class="fixed bottom-0 z-20 w-full border-t border-white/10 bg-background-dark/80 backdrop-blur-sm">
+<div class="flex h-20 items-center justify-around">
+<a class="flex flex-col items-center gap-1 text-white/70" href="#">
+<span class="material-symbols-outlined text-2xl">music_note</span>
+<span class="text-xs font-medium">Requests</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/70" href="#">
+<span class="material-symbols-outlined text-2xl">rate_review</span>
+<span class="text-xs font-medium">Feedback</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/70" href="#">
+<span class="material-symbols-outlined text-2xl">volunteer_activism</span>
+<span class="text-xs font-medium">Tips</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill text-2xl">settings</span>
+<span class="text-xs font-medium">Settings</span>
+</a>
+</div>
+</nav>
+</div>
+
+</body></html>

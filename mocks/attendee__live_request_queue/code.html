@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DJ Live Requests</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2D9CDB",
+            "secondary": "#F81C9A",
+            "background-light": "#f6f5f8",
+            "background-dark": "#131022",
+          },
+          fontFamily: {
+            "display": ["Be Vietnam Pro", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "1.5rem",
+            "xl": "2rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-10 flex items-center justify-between bg-background-dark/80 p-4 pb-2 backdrop-blur-sm">
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 rounded-full bg-white/10 p-1 pr-3 text-white">
+<span class="material-symbols-outlined rounded-full bg-primary p-1 text-base">person</span>
+<span class="text-sm font-medium">Anonymous Panda</span>
+</button>
+</div>
+<h1 class="flex-1 pr-12 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-white">Live Requests</h1>
+</header>
+<main class="flex flex-1 flex-col pb-28">
+<section class="p-4 pt-0">
+<div class="flex flex-col items-stretch justify-start rounded-lg bg-white/5 p-4">
+<div class="relative w-full overflow-hidden rounded bg-cover bg-center bg-no-repeat aspect-square" data-alt="Album art for the song Blinding Lights by The Weeknd" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuClpS0XAFSp-4oqzcyzS6uSDwx2x7JmrMbW_hHxIZBZuc6oIKqiXB4OWhikKISuopqMwIE_wzkL90CGkJfxMkpe5biGy-PqYTjt-yFgGNowc3xp6XeEpkEp8EL5Ujg0kFp5zPW_A9LMSTxzPFy_fUPsaT6ulJkYhZCSQLKip-d_sAfxNsQruF-0JtqMoNIBTeuRxXOAMnizGp349szXyOuUYZ_e5YOvjkOYpwY4pnqH4nrZdWTLCOOiuRqjtkgGBfulRICA2_85pJw");'></div>
+<div class="flex w-full grow flex-col items-stretch justify-center gap-2 py-4">
+<p class="text-sm font-normal leading-normal text-primary">Now Playing</p>
+<p class="text-2xl font-bold leading-tight tracking-[-0.015em] text-white">Blinding Lights</p>
+<p class="text-base font-normal leading-normal text-white/70">The Weeknd</p>
+<p class="text-base font-normal leading-normal text-white/70">Requested by: Sarah J.</p>
+</div>
+<div class="flex flex-col gap-2">
+<div class="rounded-full bg-white/20">
+<div class="h-2 rounded-full bg-primary" style="width: 60%;"></div>
+</div>
+<div class="flex justify-between">
+<p class="text-sm font-normal leading-normal text-white/70">2:21</p>
+<p class="text-sm font-normal leading-normal text-white/70">3:55</p>
+</div>
+</div>
+</div>
+</section>
+<nav class="sticky top-[72px] z-10 bg-background-dark/80 px-4 py-3 backdrop-blur-sm">
+<div class="flex h-10 flex-1 items-center justify-center rounded-full bg-white/5 p-1">
+<label class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-full px-2 text-sm font-medium leading-normal text-white/70 has-[:checked]:bg-gradient-to-r has-[:checked]:from-primary has-[:checked]:to-secondary has-[:checked]:text-white has-[:checked]:shadow-[0_0_15px_rgba(45,156,219,0.5),0_0_15px_rgba(248,28,154,0.4)]">
+<span class="truncate">Up Next</span>
+<input checked="" class="invisible w-0" name="song-queue-tab" type="radio" value="Up Next"/>
+</label>
+<label class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-full px-2 text-sm font-medium leading-normal text-white/70 has-[:checked]:bg-gradient-to-r has-[:checked]:from-primary has-[:checked]:to-secondary has-[:checked]:text-white has-[:checked]:shadow-[0_0_15px_rgba(45,156,219,0.5),0_0_15px_rgba(248,28,154,0.4)]">
+<span class="truncate">Played</span>
+<input class="invisible w-0" name="song-queue-tab" type="radio" value="Played"/>
+</label>
+</div>
+</nav>
+<div class="flex flex-col">
+<div class="flex min-h-[72px] items-center gap-4 border-b border-white/10 bg-background-dark px-4 py-3 justify-between">
+<div class="flex items-center gap-4 overflow-hidden">
+<div class="aspect-square size-14 shrink-0 rounded bg-cover bg-center bg-no-repeat" data-alt="Album art for As It Was by Harry Styles" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9IJH47iZ8GyCLGqibwXjU_WSNFljO1WgnLxdVzgiYi7M6xVNKYcd26hIodJMXONRLcTwqHpTBYgm93ZX9U9m99TmYIDZaGNp4PsqYxpjcMGqVELZKhJkDkfJKLNshEI4--LmlhF3xqVBG-RciLcyWv8gq6ZohIOVmXZhDJ4lBpImWmsVllt1TQtQO0rG2bhfhuvbTHpljs_kiyiOZMzF0dGE_qqF6Pc-QfULVw9fKazDkhl9b6IYlyD0_SzZUfpRj_sPAsZwm7Xk");'></div>
+<div class="flex flex-col justify-center overflow-hidden">
+<p class="truncate text-base font-medium leading-normal text-white">As It Was</p>
+<p class="truncate text-sm font-normal leading-normal text-white/70">Harry Styles</p>
+</div>
+</div>
+<div class="flex shrink-0 items-center gap-3">
+<p class="text-sm font-medium text-primary">Up Next</p>
+<button class="flex flex-col items-center text-secondary hover:text-secondary/80">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="text-xs font-medium">124</span>
+</button>
+</div>
+</div>
+<div class="flex min-h-[72px] items-center gap-4 border-b border-white/10 bg-background-dark px-4 py-3 justify-between">
+<div class="flex items-center gap-4 overflow-hidden">
+<div class="aspect-square size-14 shrink-0 rounded bg-cover bg-center bg-no-repeat" data-alt="Album art for Levitating by Dua Lipa" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrwFJuT9jKJHridWc1-G6EHrAl0sq0lv9qr2ZQ0MeiZf2vGwzUF-tGdy942qf8_WIrzdZT6qFPxBiypS2qqZeXw9jCiIXKI7phGQ09t754pxBf4lru40DHaU3WwiXZS1yKSRzW7RkookuyLlTeg8SXaFAYbZk2lRsJKJUYNV1uuVr3TZVmeS2sjReF0IJXwzXK4ru3yYNH0i89hYUuj3z8MbCqI5KJEMBpoyUxc7cPuP-6jlOcRreeK0fqSAH6gpdaJU9SEh0yrJY");'></div>
+<div class="flex flex-col justify-center overflow-hidden">
+<p class="truncate text-base font-medium leading-normal text-white">Levitating</p>
+<p class="truncate text-sm font-normal leading-normal text-white/70">Dua Lipa</p>
+</div>
+</div>
+<div class="flex shrink-0 items-center gap-3">
+<p class="text-sm font-normal text-white/70">Pending</p>
+<button class="flex flex-col items-center text-white/70 hover:text-secondary">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="text-xs font-medium">98</span>
+</button>
+</div>
+</div>
+<div class="flex min-h-[72px] items-center gap-4 border-b border-white/10 bg-background-dark px-4 py-3 justify-between">
+<div class="flex items-center gap-4 overflow-hidden">
+<div class="aspect-square size-14 shrink-0 rounded bg-cover bg-center bg-no-repeat" data-alt="Album art for Good 4 U by Olivia Rodrigo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFjomeppGHBepaAFcKah0deXwUvVlkcisw-PbW5Sgq7h50Zjl18MEs-Re-n93iJQAmizidu1WFc0cf1KQ8Wm6Ap2o7BR37vH3ZLXcFh8dFTxr_YPp-dAXScfHVxfr3byao7p3MgldBRgEJKeCMSyj3ETuK5s5uhf0MZhKsCJvWjPVuipEjmTK8Ux8NSzgPsYv9uhsnPL083fXz2diP5qM0brUOziVB1K1oA5MRe445oqnQDRW0T6FZbPC31NkKTpZEYcH8MW_cCx4");'></div>
+<div class="flex flex-col justify-center overflow-hidden">
+<p class="truncate text-base font-medium leading-normal text-white">Good 4 U</p>
+<p class="truncate text-sm font-normal leading-normal text-white/70">Olivia Rodrigo</p>
+</div>
+</div>
+<div class="flex shrink-0 items-center gap-3">
+<p class="text-sm font-normal text-white/70">Pending</p>
+<button class="flex flex-col items-center text-white/70 hover:text-secondary">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="text-xs font-medium">72</span>
+</button>
+</div>
+</div>
+<div class="flex min-h-[72px] items-center gap-4 bg-background-dark px-4 py-3 justify-between">
+<div class="flex items-center gap-4 overflow-hidden">
+<div class="aspect-square size-14 shrink-0 rounded bg-cover bg-center bg-no-repeat" data-alt="Album art for Peaches by Justin Bieber" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpKW398vnwNqwQDYKpyII3Mvw_0WLUuEd_al1RC7tOOpCDTkQaKA21uEvIzH4SMg1jY5HEhA1NMghbgoOeFBBjdaONFfQ8U-iVmI9ztnp26k4jLmEvL6Wni4lioukkbWfCeQ2SIi7kRMLIQsTV6C_pZTzXk2dYiW5J-HFyd3RiUbWC1uyYxkC7988swZL-mx4RX8xToYjBu1eUeBhNzKSsLX6XDpsyTCNoyQEWlwMH5joQjoBH0KkjG4DH18sFk-rFibVADOrNz2w");'></div>
+<div class="flex flex-col justify-center overflow-hidden">
+<p class="truncate text-base font-medium leading-normal text-white">Peaches</p>
+<p class="truncate text-sm font-normal leading-normal text-white/70">Justin Bieber</p>
+</div>
+</div>
+<div class="flex shrink-0 items-center gap-3">
+<p class="text-sm font-normal text-white/70">Pending</p>
+<button class="flex flex-col items-center text-white/70 hover:text-secondary">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="text-xs font-medium">55</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-24 right-6 z-20 flex flex-col items-center gap-3">
+<button class="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm">
+<span class="material-symbols-outlined text-2xl">volunteer_activism</span>
+</button>
+<button class="flex h-14 items-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-5 text-white shadow-[0_4px_15px_rgba(0,0,0,0.2),0_0_15px_rgba(45,156,219,0.5),0_0_15px_rgba(248,28,154,0.4)]">
+<span class="material-symbols-outlined">add</span>
+<span class="text-base font-medium">Request</span>
+</button>
+</div>
+<nav class="fixed bottom-0 z-20 w-full border-t border-white/10 bg-background-dark/80 backdrop-blur-sm">
+<div class="flex h-20 items-center justify-around">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">music_note</span>
+<span class="text-xs font-medium">Requests</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/70" href="#">
+<span class="material-symbols-outlined text-2xl">rate_review</span>
+<span class="text-xs font-medium">Feedback</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/70" href="#">
+<span class="material-symbols-outlined text-2xl">info</span>
+<span class="text-xs font-medium">Event Info</span>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

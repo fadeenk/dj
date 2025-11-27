@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Send Feedback to the DJ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#00A9FF",
+              secondary: "#FF00C7",
+              "background-light": "#f6f5f8",
+              "background-dark": "#131022",
+            },
+            fontFamily: {
+              display: ["Be Vietnam Pro", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="flex flex-col flex-1">
+<div class="flex items-center p-4">
+<div class="flex size-12 shrink-0 items-center justify-start text-white/90">
+<span class="material-symbols-outlined text-3xl">arrow_back</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Send Feedback to the DJ</h2>
+</div>
+<div class="px-4 pb-2">
+<p class="text-white/60 text-center text-sm font-normal leading-normal">Your feedback is sent directly and anonymously to the DJ.</p>
+</div>
+<div class="flex flex-col flex-1 px-4 pt-4">
+<div class="flex flex-col flex-1">
+<label class="flex flex-col flex-1">
+<textarea class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white/90 focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-white/5 focus:border-none placeholder:text-white/40 p-4 text-base font-normal leading-normal" placeholder="Loving the vibe! Any chance you can play some funk?"></textarea>
+</label>
+</div>
+<div class="flex justify-end pt-2">
+<p class="text-white/40 text-sm font-normal leading-normal">140/140</p>
+</div>
+</div>
+<div class="sticky bottom-0 w-full bg-background-dark pt-3 pb-6 px-4">
+<button class="flex min-w-[84px] max-w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-5 w-full bg-gradient-to-r from-primary to-secondary text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-secondary/30">
+<span class="truncate">Send</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>
