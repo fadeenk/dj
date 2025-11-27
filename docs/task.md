@@ -7,10 +7,10 @@
     - [x] Configure environment variables
     - [x] Configure Tailwind theme (Colors, Fonts) from mocks
 
-- [ ] **Phase 2: Database & Authentication**
-    - [ ] Design Database Schema (Events, Requests, Feedback)
-    - [ ] Implement Anonymous Guest Auth (UUID in localStorage)
-    - [ ] Implement Admin Auth (Email/Password)
+- [x] **Phase 2: Database & Authentication**
+    - [x] Design Database Schema (Events, Requests, Feedback)
+    - [x] Implement Anonymous Guest Auth (UUID in localStorage)
+    - [x] Implement Admin Auth (Email/Password)
 
 - [ ] **Phase 3: Admin Event Management**
     - [ ] Build Admin Dashboard layout

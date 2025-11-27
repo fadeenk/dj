@@ -34,8 +34,34 @@ npm create nuxt@latest -- -t github:nuxt-ui-templates/starter
 Make sure to install the dependencies:
 
 ```bash
+# npm
 npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
 ```
+
+## Supabase Development
+
+1.  Initialize Supabase locally:
+    ```bash
+    npx supabase init
+    ```
+2.  Start local Supabase:
+    ```bash
+    npx supabase start
+    ```
+3.  Link to remote project (Project ID: `crdigodfxazwewymkdud`):
+    ```bash
+    npx supabase link --project-ref crdigodfxazwewymkdud
+    ```
+4.  Generate types:
+    ```bash
+    npx supabase gen types typescript --local > app/types/database.types.ts
+    ```
 
 ## Development Server
 
