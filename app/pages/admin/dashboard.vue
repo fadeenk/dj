@@ -16,6 +16,11 @@ interface Event {
   date: string
   is_active: boolean | null
   dj_id: string
+  location?: string | null
+  start_time?: string | null
+  end_time?: string | null
+  description?: string | null
+  house_rules?: string | null
 }
 
 // State
@@ -29,7 +34,12 @@ const newEvent = ref({
   name: '',
   code: '',
   date: new Date().toISOString().split('T')[0],
-  is_active: true
+  is_active: true,
+  location: '',
+  start_time: '',
+  end_time: '',
+  description: '',
+  house_rules: ''
 })
 const creating = ref(false)
 
@@ -77,7 +87,12 @@ async function createEvent() {
       code: newEvent.value.code,
       date: newEvent.value.date,
       is_active: newEvent.value.is_active,
-      dj_id: userId
+      dj_id: userId,
+      location: newEvent.value.location || null,
+      start_time: newEvent.value.start_time || null,
+      end_time: newEvent.value.end_time || null,
+      description: newEvent.value.description || null,
+      house_rules: newEvent.value.house_rules || null
     }
 
     console.log('Payload:', eventData)
@@ -97,7 +112,12 @@ async function createEvent() {
       name: '',
       code: '',
       date: new Date().toISOString().split('T')[0],
-      is_active: true
+      is_active: true,
+      location: '',
+      start_time: '',
+      end_time: '',
+      description: '',
+      house_rules: ''
     }
     toast.add({
       title: 'Event created',
@@ -320,6 +340,50 @@ onMounted(() => {
               v-model="newEvent.date"
               type="date"
               required
+            />
+          </UFormField>
+
+          <div class="grid grid-cols-2 gap-4">
+            <UFormField label="Start Time">
+              <UInput
+                v-model="newEvent.start_time"
+                type="time"
+                placeholder="e.g. 21:00"
+              />
+            </UFormField>
+
+            <UFormField label="End Time">
+              <UInput
+                v-model="newEvent.end_time"
+                type="time"
+                placeholder="e.g. 02:00"
+              />
+            </UFormField>
+          </div>
+
+          <UFormField label="Location">
+            <UInput
+              v-model="newEvent.location"
+              placeholder="e.g. The Void, 123 Electric Ave, Downtown"
+            />
+          </UFormField>
+
+          <UFormField label="Description">
+            <UTextarea
+              v-model="newEvent.description"
+              placeholder="About the event..."
+              :rows="3"
+            />
+          </UFormField>
+
+          <UFormField
+            label="House Rules"
+            help="One rule per line"
+          >
+            <UTextarea
+              v-model="newEvent.house_rules"
+              placeholder="Respect the vibe, respect each other.&#10;Song requests are welcome through the app.&#10;No outside drinks or food."
+              :rows="4"
             />
           </UFormField>
 

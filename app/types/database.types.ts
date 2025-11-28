@@ -1,4 +1,4 @@
-export type Json =
+﻿export type Json =
   | string
   | number
   | boolean
@@ -7,48 +7,26 @@ export type Json =
   | Json[]
 
 export type Database = {
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       djs: {
         Row: {
           avatar_url: string | null
+          created_at: string | null
           id: string
           payment_links: Json | null
           username: string | null
         }
         Insert: {
           avatar_url?: string | null
+          created_at?: string | null
           id: string
           payment_links?: Json | null
           username?: string | null
         }
         Update: {
           avatar_url?: string | null
+          created_at?: string | null
           id?: string
           payment_links?: Json | null
           username?: string | null
@@ -60,28 +38,43 @@ export type Database = {
           code: string
           created_at: string | null
           date: string
+          description: string | null
           dj_id: string
+          end_time: string | null
+          house_rules: string | null
           id: string
           is_active: boolean | null
+          location: string | null
           name: string
+          start_time: string | null
         }
         Insert: {
           code: string
           created_at?: string | null
           date: string
+          description?: string | null
           dj_id: string
+          end_time?: string | null
+          house_rules?: string | null
           id?: string
           is_active?: boolean | null
+          location?: string | null
           name: string
+          start_time?: string | null
         }
         Update: {
           code?: string
           created_at?: string | null
           date?: string
+          description?: string | null
           dj_id?: string
+          end_time?: string | null
+          house_rules?: string | null
           id?: string
           is_active?: boolean | null
+          location?: string | null
           name?: string
+          start_time?: string | null
         }
         Relationships: [
           {
@@ -310,9 +303,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       feedback_sentiment: ["positive", "negative", "neutral"],
