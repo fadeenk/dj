@@ -16,9 +16,12 @@
     "@nuxt/hints": "1.0.0-alpha.2",
     "@nuxt/ui": "^4.2.1",
     "@nuxtjs/supabase": "^2.0.1",
-    "nuxt": "^4.2.1"
+    "@types/qrcode": "^1.5.6",
+    "nuxt": "^4.2.1",
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
+    "@iconify-json/heroicons": "^1.2.3",
     "@nuxt/eslint": "^1.11.0",
     "eslint": "^9.39.1",
     "typescript": "^5.9.3",

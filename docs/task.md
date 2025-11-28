@@ -12,10 +12,11 @@
     - [x] Implement Anonymous Guest Auth (UUID in localStorage)
     - [x] Implement Admin Auth (Email/Password)
 
-- [ ] **Phase 3: Admin Event Management**
-    - [ ] Build Admin Dashboard layout
-    - [ ] Implement Event Management (Create, Edit, Delete Events)
-    - [ ] Generate Event Codes
+- [x] **Phase 3: Admin Event Management**
+    - [x] Build Admin Dashboard layout
+    - [x] Implement Event Management (Create, Edit, Delete Events)
+    - [x] Generate Event qr code and customizable unique slug
+    - [ ] Add missing fields to the model and event details page
 
 - [ ] **Phase 4: Song Requests E2E**
     - [ ] Create Event Landing Page (Guest Join)
