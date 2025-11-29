@@ -211,9 +211,75 @@ function copyLink() {
   })
 }
 
+// Unread feedback count
+const unreadFeedbackCount = ref(0)
+
+async function fetchUnreadFeedbackCount() {
+  try {
+    const { data: sessionData } = await supabase.auth.getSession()
+    const userId = sessionData.session?.user.id
+
+    if (!userId) return
+
+    const { count, error } = await supabase
+      .from('feedback')
+      .select('*', { count: 'exact', head: true })
+      .eq('is_read', false)
+      // We need to filter by events owned by this DJ
+      // This is a bit complex with RLS, but since we have RLS policy "DJs can view feedback for their events"
+      // we can just query feedback directly and RLS will filter it for us?
+      // Let's verify RLS policy:
+      // CREATE POLICY "DJs can view feedback for their events" ON public.feedback FOR SELECT USING (EXISTS (SELECT 1 FROM public.events WHERE public.events.id = public.feedback.event_id AND public.events.dj_id = auth.uid()))
+      // Yes, RLS handles it!
+
+    if (error) throw error
+    unreadFeedbackCount.value = count || 0
+  } catch (error) {
+    console.error('Error fetching unread feedback count:', error)
+  }
+}
+
+// Subscribe to new feedback
+function subscribeToFeedback() {
+  console.log('Subscribing to feedback changes...')
+  const channel = supabase
+    .channel('dashboard-feedback')
+    .on(
+      'postgres_changes',
+      {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'feedback'
+      },
+      (payload) => {
+        console.log('Realtime feedback received:', payload)
+        // Increment count on new feedback
+        // We could check if it belongs to us, but RLS might not filter realtime events payload if we don't use filter
+        // Ideally we should refetch count to be safe and accurate
+        fetchUnreadFeedbackCount()
+        toast.add({
+          title: 'New feedback received!',
+          color: 'primary',
+          icon: 'i-heroicons-chat-bubble-left-ellipsis'
+        })
+      }
+    )
+    .subscribe((status) => {
+      console.log('Subscription status:', status)
+    })
+
+  return channel
+}
+
 // Initial fetch
 onMounted(() => {
   fetchEvents()
+  fetchUnreadFeedbackCount()
+  const channel = subscribeToFeedback()
+
+  onUnmounted(() => {
+    supabase.removeChannel(channel)
+  })
 })
 </script>
 
@@ -223,12 +289,28 @@ onMounted(() => {
       <h1 class="text-2xl font-bold">
         Event Management
       </h1>
-      <UButton
-        icon="i-heroicons-plus"
-        color="primary"
-        label="Create Event"
-        @click="isCreateModalOpen = true"
-      />
+      <div class="flex gap-2">
+        <UChip
+          :text="unreadFeedbackCount"
+          :show="unreadFeedbackCount > 0"
+          color="error"
+          size="2xl"
+        >
+          <UButton
+            to="/admin/feedback"
+            icon="i-heroicons-chat-bubble-left-ellipsis"
+            color="neutral"
+            variant="soft"
+            label="View Feedback"
+          />
+        </UChip>
+        <UButton
+          icon="i-heroicons-plus"
+          color="primary"
+          label="Create Event"
+          @click="isCreateModalOpen = true"
+        />
+      </div>
     </div>
 
     <div

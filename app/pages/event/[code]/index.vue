@@ -279,6 +279,28 @@ async function handleRequestSubmit(data: {
             :event-id="event.id"
           />
         </div>
+
+        <!-- Feedback & Tips Actions -->
+        <div class="flex flex-col gap-3">
+          <UButton
+            :to="`/event/${code}/feedback`"
+            icon="i-heroicons-chat-bubble-left-ellipsis"
+            color="neutral"
+            variant="soft"
+            label="Send Feedback to DJ"
+            size="lg"
+            block
+          />
+          <UButton
+            :to="`/event/${code}/tips`"
+            icon="i-heroicons-banknotes"
+            color="primary"
+            variant="soft"
+            label="Tip the DJ"
+            size="lg"
+            block
+          />
+        </div>
       </template>
     </main>
 

@@ -24,18 +24,31 @@
     - [x] Build Admin Request Management (View, Update Status)
     - [x] Build Live Request Feed (Real-time updates for both)
 
-- [ ] **Phase 5: Feedback & Tip Systems**
-    - [ ] Implement Tip the DJ section
-    - [ ] Implement Feedback/Sentiment system
+- [x] **Phase 5: Feedback & Tip Systems**
+    - [x] Implement Tip the DJ page
+      - [x] Paypal (https://paypal.me/fadeek)
+      - [x] Venmo @FadeeKannah
+      - [x] Zelle fadeekannah@gmail.com
+    - [x] Implement Feedback/Sentiment system
 
 - [ ] **Phase 6: Enhancements**
     - [ ] Landing page list active events today
+    - [ ] Make event url case insensitive
     - [ ] Cleanup app header Have user name and avatar on the left and night/ligh mode on the right, in the center have page title, home show nothing
     - [ ] Guest users have random animal name and avatar
     - [ ] Guest user can change name and avatar
+    - [ ] Make sure the correct name is used when requesting and submitting feedback
     - [ ] submitting request should save id and name in supabase
     
 - [ ] **Phase 7: UI/UX Polish & Deployment**
+    - [ ] Fix UI colors and layout
     - [ ] Apply Mobile-first responsive design
     - [ ] Add animations and transitions
+    - [ ] Fix typing errors
     - [ ] Bug fixes
+
+- [ ] **Phase 8: Future Enhancements**
+  - [ ] Feedback sentiment Thumbs up/down
+  - [ ] Dynamic Avatars
+
+    
