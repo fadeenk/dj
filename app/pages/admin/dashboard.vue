@@ -256,44 +256,57 @@ onMounted(() => {
         v-for="event in events"
         :key="event.id"
       >
-        <div class="flex justify-between items-start">
-          <div>
-            <h3 class="text-xl font-semibold">
-              {{ event.name }}
-            </h3>
-            <p class="text-sm text-gray-500">
-              Code: {{ event.code }}
-            </p>
-            <p class="text-sm text-gray-500">
-              Date: {{ new Date(event.date).toLocaleDateString() }}
-            </p>
+        <div class="flex flex-col gap-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-xl font-semibold">
+                {{ event.name }}
+              </h3>
+              <p class="text-sm text-gray-500">
+                Code: {{ event.code }}
+              </p>
+              <p class="text-sm text-gray-500">
+                Date: {{ new Date(event.date).toLocaleDateString() }}
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <UBadge :color="event.is_active ? 'success' : 'neutral'">
+                {{ event.is_active ? 'Active' : 'Inactive' }}
+              </UBadge>
+              <UButton
+                icon="i-heroicons-qr-code"
+                color="neutral"
+                variant="ghost"
+                title="View QR Code"
+                @click="showQrCode(event)"
+              />
+              <UButton
+                :icon="event.is_active ? 'i-heroicons-pause' : 'i-heroicons-play'"
+                color="neutral"
+                variant="ghost"
+                :title="event.is_active ? 'Deactivate' : 'Activate'"
+                @click="toggleEventStatus(event)"
+              />
+              <UButton
+                icon="i-heroicons-trash"
+                color="error"
+                variant="ghost"
+                title="Delete"
+                @click="deleteEvent(event.id)"
+              />
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <UBadge :color="event.is_active ? 'success' : 'neutral'">
-              {{ event.is_active ? 'Active' : 'Inactive' }}
-            </UBadge>
-            <UButton
-              icon="i-heroicons-qr-code"
-              color="neutral"
-              variant="ghost"
-              title="View QR Code"
-              @click="showQrCode(event)"
-            />
-            <UButton
-              :icon="event.is_active ? 'i-heroicons-pause' : 'i-heroicons-play'"
-              color="neutral"
-              variant="ghost"
-              :title="event.is_active ? 'Deactivate' : 'Activate'"
-              @click="toggleEventStatus(event)"
-            />
-            <UButton
-              icon="i-heroicons-trash"
-              color="error"
-              variant="ghost"
-              title="Delete"
-              @click="deleteEvent(event.id)"
-            />
-          </div>
+
+          <!-- Request Manager (Collapsible or always visible for active events?) -->
+          <!-- Let's make it expandable -->
+          <UAccordion
+            :items="[{ label: 'Manage Requests', slot: 'requests' }]"
+            variant="soft"
+          >
+            <template #requests>
+              <RequestQueue :event-id="event.id" is-admin />
+            </template>
+          </UAccordion>
         </div>
       </UCard>
     </div>

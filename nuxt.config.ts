@@ -28,6 +28,9 @@ export default defineNuxtConfig({
     redirect: false,
     types: '~/types/database.types.ts'
   },
+  runtimeConfig: {
+    youtubeApiKey: process.env.NUXT_YOUTUBE_API_KEY
+  },
   app: {
     head: {
       link: [

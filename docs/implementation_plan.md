@@ -86,6 +86,10 @@ Build a real-time mobile-first web application that allows event attendees to re
 - Update local state immediately on changes.
 
 ## Verification Plan
+Use these credentials 
+Email: fadeekannah@gmail.com
+Password: test123
+
 
 ### Manual Verification
 - **Guest Flow:** Join event -> Search song -> Submit -> Verify appears in feed.

@@ -119,6 +119,42 @@ onMounted(() => {
     userName.value = storedName
   }
 })
+
+// Request Form Logic
+const showRequestForm = ref(false)
+
+async function handleRequestSubmit(data: {
+  song_title: string
+  song_artist: string
+  youtube_url: string
+  user_comment: string
+}) {
+  if (!event.value) return
+
+  try {
+    const { error } = await supabase
+      .from('requests')
+      .insert({
+        event_id: event.value.id,
+        user_session_id: localStorage.getItem('guestUserId') || 'anonymous',
+        user_name: userName.value,
+        song_title: data.song_title,
+        song_artist: data.song_artist,
+        youtube_url: data.youtube_url,
+        user_comment: data.user_comment,
+        status: 'pending',
+        upvotes: 0
+      })
+
+    if (error) throw error
+
+    showRequestForm.value = false
+  } catch (err) {
+    console.error('Error submitting request:', err)
+    alert('Failed to submit request. Please try again.')
+  }
+}
+
 </script>
 
 <template>
@@ -217,8 +253,35 @@ onMounted(() => {
             </li>
           </ul>
         </div>
+
+        <!-- Song Requests -->
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-white">Song Requests</h3>
+            <UButton
+              v-if="!showRequestForm"
+              icon="i-heroicons-plus"
+              color="primary"
+              variant="solid"
+              label="Request Song"
+              @click="showRequestForm = true"
+            />
+          </div>
+
+          <RequestForm
+            v-if="showRequestForm"
+            :event-id="event.id"
+            @submit="handleRequestSubmit"
+            @cancel="showRequestForm = false"
+          />
+
+          <RequestQueue
+            :event-id="event.id"
+          />
+        </div>
       </template>
     </main>
+
   </div>
 </template>
 
