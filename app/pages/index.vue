@@ -1,76 +1,116 @@
+<script setup lang="ts">
+const supabase = useSupabaseClient()
+const events = ref([])
+const loading = ref(true)
+
+onMounted(async () => {
+  // Get today's date in local time formatted as YYYY-MM-DD
+  const today = new Date()
+  const localDateString = today.toLocaleDateString('en-CA')
+  
+  // Calculate tomorrow for the upper bound
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const tomorrowString = tomorrow.toLocaleDateString('en-CA')
+
+  try {
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .eq('is_active', true)
+      .gte('date', localDateString)
+      .lt('date', tomorrowString)
+      .order('start_time', { ascending: true })
+
+    if (error) throw error
+    events.value = data || []
+  } catch (error) {
+    console.error('Error fetching events:', error)
+  } finally {
+    loading.value = false
+  }
+})
+</script>
+
 <template>
   <div>
     <UPageHero
-      title="Nuxt Starter Template"
-      description="A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours."
-      :links="[{
-        label: 'Get started',
-        to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-        target: '_blank',
-        trailingIcon: 'i-lucide-arrow-right',
-        size: 'xl'
-      }, {
-        label: 'Use this template',
-        to: 'https://github.com/nuxt-ui-templates/starter',
-        target: '_blank',
-        icon: 'i-simple-icons-github',
-        size: 'xl',
-        color: 'neutral',
-        variant: 'subtle'
-      }]"
+      title="Welcome to DJ Request"
+      description="Find your event, request your favorite songs, and keep the party going."
     />
 
-    <UPageSection
-      id="features"
-      title="Everything you need to build modern Nuxt apps"
-      description="Start with a solid foundation. This template includes all the essentials for building production-ready applications with Nuxt UI's powerful component system."
-      :features="[{
-        icon: 'i-lucide-rocket',
-        title: 'Production-ready from day one',
-        description: 'Pre-configured with TypeScript, ESLint, Tailwind CSS, and all the best practices. Focus on building features, not setting up tooling.'
-      }, {
-        icon: 'i-lucide-palette',
-        title: 'Beautiful by default',
-        description: 'Leveraging Nuxt UI\'s design system with automatic dark mode, consistent spacing, and polished components that look great out of the box.'
-      }, {
-        icon: 'i-lucide-zap',
-        title: 'Lightning fast',
-        description: 'Optimized for performance with SSR/SSG support, automatic code splitting, and edge-ready deployment. Your users will love the speed.'
-      }, {
-        icon: 'i-lucide-blocks',
-        title: '100+ components included',
-        description: 'Access Nuxt UI\'s comprehensive component library. From forms to navigation, everything is accessible, responsive, and customizable.'
-      }, {
-        icon: 'i-lucide-code-2',
-        title: 'Developer experience first',
-        description: 'Auto-imports, hot module replacement, and TypeScript support. Write less boilerplate and ship more features.'
-      }, {
-        icon: 'i-lucide-shield-check',
-        title: 'Built for scale',
-        description: 'Enterprise-ready architecture with proper error handling, SEO optimization, and security best practices built-in.'
-      }]"
-    />
+    <UContainer class="py-12">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+          Today's Events
+        </h2>
+        <span class="text-sm text-gray-500">
+          {{ new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }}
+        </span>
+      </div>
 
-    <UPageSection>
-      <UPageCTA
-        title="Ready to build your next Nuxt app?"
-        description="Join thousands of developers building with Nuxt and Nuxt UI. Get this template and start shipping today."
-        variant="subtle"
-        :links="[{
-          label: 'Start building',
-          to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-          target: '_blank',
-          trailingIcon: 'i-lucide-arrow-right',
-          color: 'neutral'
-        }, {
-          label: 'View on GitHub',
-          to: 'https://github.com/nuxt-ui-templates/starter',
-          target: '_blank',
-          icon: 'i-simple-icons-github',
-          color: 'neutral',
-          variant: 'outline'
-        }]"
-      />
-    </UPageSection>
+      <div v-if="loading" class="flex justify-center py-12">
+        <UIcon name="i-heroicons-arrow-path" class="animate-spin text-3xl text-primary-500" />
+      </div>
+
+      <div v-else-if="events.length > 0" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <UCard
+          v-for="event in events"
+          :key="event.id"
+          class="hover:ring-2 hover:ring-primary-500 transition-all cursor-pointer"
+          @click="navigateTo(`/event/${event.code}`)"
+        >
+          <template #header>
+            <div class="flex justify-between items-start">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white line-clamp-1">
+                {{ event.name }}
+              </h3>
+              <UBadge color="primary" variant="subtle">
+                {{ event.code }}
+              </UBadge>
+            </div>
+          </template>
+
+          <div class="space-y-3">
+            <div v-if="event.location" class="flex items-start text-gray-600 dark:text-gray-300">
+              <UIcon name="i-heroicons-map-pin" class="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" />
+              <span class="line-clamp-2">{{ event.location }}</span>
+            </div>
+            
+            <div v-if="event.start_time" class="flex items-center text-gray-600 dark:text-gray-300">
+              <UIcon name="i-heroicons-clock" class="w-5 h-5 mr-2 flex-shrink-0" />
+              <span>
+                {{ event.start_time.slice(0, 5) }}
+                <span v-if="event.end_time"> - {{ event.end_time.slice(0, 5) }}</span>
+              </span>
+            </div>
+
+            <div v-if="event.description" class="text-sm text-gray-500 dark:text-gray-400 line-clamp-3 mt-2">
+              {{ event.description }}
+            </div>
+          </div>
+
+          <template #footer>
+            <UButton
+              block
+              color="primary"
+              variant="solid"
+              label="Join Event"
+              :to="`/event/${event.code}`"
+            />
+          </template>
+        </UCard>
+      </div>
+
+      <div v-else class="text-center py-16 bg-gray-50 dark:bg-gray-800/50 rounded-lg border-2 border-dashed border-gray-200 dark:border-gray-700">
+        <UIcon name="i-heroicons-calendar" class="w-12 h-12 text-gray-400 mb-4" />
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
+          No events found for today
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400 max-w-sm mx-auto">
+          There are no active events scheduled for today. Check back later or contact your DJ.
+        </p>
+      </div>
+    </UContainer>
   </div>
 </template>

@@ -45,7 +45,7 @@ async function fetchEvent() {
           username
         )
       `)
-      .eq('code', code)
+      .ilike('code', code)
       .single()
 
     if (fetchError) throw fetchError
@@ -109,7 +109,7 @@ const houseRules = computed(() => {
 })
 
 // Anonymous user session (stored in localStorage)
-const userName = ref('Anonymous Panda')
+const userName = ref('')
 
 onMounted(() => {
   fetchEvent()
@@ -154,7 +154,6 @@ async function handleRequestSubmit(data: {
     alert('Failed to submit request. Please try again.')
   }
 }
-
 </script>
 
 <template>
@@ -163,7 +162,10 @@ async function handleRequestSubmit(data: {
     <header class="sticky top-0 z-10 flex items-center justify-between bg-background-dark/80 p-4 pb-2 backdrop-blur-sm">
       <div class="flex items-center gap-2">
         <button class="flex items-center gap-2 rounded-full bg-white/10 p-1 pr-3 text-white">
-          <UIcon name="i-heroicons-user-circle" class="rounded-full bg-primary p-1 text-base" />
+          <UIcon
+            name="i-heroicons-user-circle"
+            class="rounded-full bg-primary p-1 text-base"
+          />
           <span class="text-sm font-medium">{{ userName }}</span>
         </button>
       </div>
@@ -175,16 +177,30 @@ async function handleRequestSubmit(data: {
     <!-- Main Content -->
     <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-white">
       <!-- Loading State -->
-      <div v-if="loading" class="flex justify-center py-8">
-        <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
+      <div
+        v-if="loading"
+        class="flex justify-center py-8"
+      >
+        <UIcon
+          name="i-heroicons-arrow-path"
+          class="animate-spin text-2xl"
+        />
       </div>
 
       <!-- Error State -->
-      <div v-else-if="error" class="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center">
+      <div
+        v-else-if="error"
+        class="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center"
+      >
         <div class="rounded-full bg-red-500/10 p-4">
-          <UIcon name="i-heroicons-exclamation-triangle" class="text-4xl text-red-500" />
+          <UIcon
+            name="i-heroicons-exclamation-triangle"
+            class="text-4xl text-red-500"
+          />
         </div>
-        <h2 class="text-xl font-bold text-white">{{ error }}</h2>
+        <h2 class="text-xl font-bold text-white">
+          {{ error }}
+        </h2>
         <UButton
           to="/"
           color="primary"
@@ -201,7 +217,10 @@ async function handleRequestSubmit(data: {
           <h2 class="text-2xl font-bold tracking-tight text-white">
             {{ event.name }}
           </h2>
-          <p v-if="event.djs?.username" class="mt-1 text-base font-normal text-primary">
+          <p
+            v-if="event.djs?.username"
+            class="mt-1 text-base font-normal text-primary"
+          >
             with DJ {{ event.djs.username }}
           </p>
         </div>
@@ -210,45 +229,85 @@ async function handleRequestSubmit(data: {
         <div class="flex flex-col gap-4 rounded-lg bg-white/5 p-4">
           <!-- Date -->
           <div class="flex items-center gap-4">
-            <UIcon name="i-heroicons-calendar" class="text-2xl text-primary" />
+            <UIcon
+              name="i-heroicons-calendar"
+              class="text-2xl text-primary"
+            />
             <div class="flex flex-col">
-              <p class="text-sm font-normal text-white/70">Date</p>
-              <p class="text-base font-medium text-white">{{ formattedDate }}</p>
+              <p class="text-sm font-normal text-white/70">
+                Date
+              </p>
+              <p class="text-base font-medium text-white">
+                {{ formattedDate }}
+              </p>
             </div>
           </div>
 
           <!-- Time -->
-          <div v-if="formattedTime" class="flex items-center gap-4">
-            <UIcon name="i-heroicons-clock" class="text-2xl text-primary" />
+          <div
+            v-if="formattedTime"
+            class="flex items-center gap-4"
+          >
+            <UIcon
+              name="i-heroicons-clock"
+              class="text-2xl text-primary"
+            />
             <div class="flex flex-col">
-              <p class="text-sm font-normal text-white/70">Time</p>
-              <p class="text-base font-medium text-white">{{ formattedTime }}</p>
+              <p class="text-sm font-normal text-white/70">
+                Time
+              </p>
+              <p class="text-base font-medium text-white">
+                {{ formattedTime }}
+              </p>
             </div>
           </div>
 
           <!-- Location -->
-          <div v-if="event.location" class="flex items-center gap-4">
-            <UIcon name="i-heroicons-map-pin" class="text-2xl text-primary" />
+          <div
+            v-if="event.location"
+            class="flex items-center gap-4"
+          >
+            <UIcon
+              name="i-heroicons-map-pin"
+              class="text-2xl text-primary"
+            />
             <div class="flex flex-col">
-              <p class="text-sm font-normal text-white/70">Location</p>
-              <p class="text-base font-medium text-white">{{ event.location }}</p>
+              <p class="text-sm font-normal text-white/70">
+                Location
+              </p>
+              <p class="text-base font-medium text-white">
+                {{ event.location }}
+              </p>
             </div>
           </div>
         </div>
 
         <!-- About the Event -->
-        <div v-if="event.description" class="flex flex-col gap-2 rounded-lg bg-white/5 p-4">
-          <h3 class="text-lg font-bold text-white">About the Event</h3>
+        <div
+          v-if="event.description"
+          class="flex flex-col gap-2 rounded-lg bg-white/5 p-4"
+        >
+          <h3 class="text-lg font-bold text-white">
+            About the Event
+          </h3>
           <p class="text-sm font-normal leading-normal text-white/70">
             {{ event.description }}
           </p>
         </div>
 
         <!-- House Rules -->
-        <div v-if="houseRules.length > 0" class="flex flex-col gap-2 rounded-lg bg-white/5 p-4">
-          <h3 class="text-lg font-bold text-white">House Rules</h3>
+        <div
+          v-if="houseRules.length > 0"
+          class="flex flex-col gap-2 rounded-lg bg-white/5 p-4"
+        >
+          <h3 class="text-lg font-bold text-white">
+            House Rules
+          </h3>
           <ul class="list-inside list-disc space-y-2 pl-1 text-sm font-normal leading-normal text-white/70">
-            <li v-for="(rule, index) in houseRules" :key="index">
+            <li
+              v-for="(rule, index) in houseRules"
+              :key="index"
+            >
               {{ rule }}
             </li>
           </ul>
@@ -257,7 +316,9 @@ async function handleRequestSubmit(data: {
         <!-- Song Requests -->
         <div class="flex flex-col gap-4">
           <div class="flex items-center justify-between">
-            <h3 class="text-lg font-bold text-white">Song Requests</h3>
+            <h3 class="text-lg font-bold text-white">
+              Song Requests
+            </h3>
             <UButton
               v-if="!showRequestForm"
               icon="i-heroicons-plus"
@@ -283,7 +344,7 @@ async function handleRequestSubmit(data: {
         <!-- Feedback & Tips Actions -->
         <div class="flex flex-col gap-3">
           <UButton
-            :to="`/event/${code}/feedback`"
+            :to="`/event/${event.code}/feedback`"
             icon="i-heroicons-chat-bubble-left-ellipsis"
             color="neutral"
             variant="soft"
@@ -292,7 +353,7 @@ async function handleRequestSubmit(data: {
             block
           />
           <UButton
-            :to="`/event/${code}/tips`"
+            :to="`/event/${event.code}/tips`"
             icon="i-heroicons-banknotes"
             color="primary"
             variant="soft"
@@ -303,7 +364,6 @@ async function handleRequestSubmit(data: {
         </div>
       </template>
     </main>
-
   </div>
 </template>
 

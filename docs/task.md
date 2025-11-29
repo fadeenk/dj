@@ -32,16 +32,17 @@
     - [x] Implement Feedback/Sentiment system
 
 - [ ] **Phase 6: Enhancements**
-    - [ ] Landing page list active events today
-    - [ ] Make event url case insensitive
-    - [ ] Cleanup app header Have user name and avatar on the left and night/ligh mode on the right, in the center have page title, home show nothing
-    - [ ] Guest users have random animal name and avatar
-    - [ ] Guest user can change name and avatar
-    - [ ] Make sure the correct name is used when requesting and submitting feedback
+    - [x] Landing page list active events today
+    - [x] Make event url case insensitive
+    - [ ] Cleanup app header have page title, home show nothing
+    - [x] Guest users have random animal name and avatar
+    - [x] Guest user can change name and avatar
+    - [x] Make sure the correct name is used when requesting and submitting feedback
     - [ ] submitting request should save id and name in supabase
+    - [ ] Create event use timezone and use start and end times 
     
 - [ ] **Phase 7: UI/UX Polish & Deployment**
-    - [ ] Fix UI colors and layout
+    - [ ] Fix UI colors and ensure it works in both light and dark modes and layout
     - [ ] Apply Mobile-first responsive design
     - [ ] Add animations and transitions
     - [ ] Fix typing errors
