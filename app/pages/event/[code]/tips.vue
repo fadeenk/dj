@@ -92,7 +92,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative flex min-h-screen w-full flex-col bg-background-dark text-white">
+  <div class="relative flex min-h-screen w-full flex-col text-gray-900 dark:text-white">
     <!-- Loading State -->
     <div v-if="loading" class="flex flex-1 items-center justify-center">
       <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
@@ -109,7 +109,7 @@ onMounted(() => {
             class="h-full w-full object-cover"
           >
         </div>
-        <div v-else class="flex h-full w-full items-center justify-center rounded-full bg-background-dark">
+        <div v-else class="flex h-full w-full items-center justify-center rounded-full bg-gray-100 dark:bg-[#131022]">
           <UIcon name="i-heroicons-user-circle" class="text-6xl text-primary" />
         </div>
       </div>
@@ -118,7 +118,7 @@ onMounted(() => {
       <h2 class="mt-6 text-3xl font-bold">
         {{ djName }}
       </h2>
-      <p class="mt-2 text-white/70">
+      <p class="mt-2 text-gray-600 dark:text-white/70">
         Enjoying the music? Show some love!
       </p>
 
@@ -130,7 +130,7 @@ onMounted(() => {
           :href="method.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex h-16 items-center gap-4 rounded-lg bg-white/10 p-4 transition-transform duration-200 hover:scale-105"
+          class="flex h-16 items-center gap-4 rounded-lg bg-gray-100 p-4 transition-transform duration-200 hover:scale-105 dark:bg-white/10"
         >
           <img
             v-if="method.isCustom"
@@ -144,14 +144,14 @@ onMounted(() => {
             class="text-2xl"
           />
           <span class="text-lg font-semibold">{{ method.handle }}</span>
-          <UIcon name="i-heroicons-arrow-right" class="ml-auto text-white/50" />
+          <UIcon name="i-heroicons-arrow-right" class="ml-auto text-gray-400 dark:text-white/50" />
         </a>
       </div>
 
       <!-- Cash Tips Message -->
-      <div class="mt-8 flex items-center gap-3 rounded-full bg-white/5 px-5 py-3">
+      <div class="mt-8 flex items-center gap-3 rounded-full bg-gray-100 px-5 py-3 dark:bg-white/5">
         <UIcon name="i-heroicons-banknotes" class="text-2xl text-primary" />
-        <p class="font-medium text-white/80">
+        <p class="font-medium text-gray-700 dark:text-white/80">
           Cash tips are also welcome!
         </p>
       </div>

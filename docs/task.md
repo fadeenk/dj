@@ -44,13 +44,18 @@
     
 - [ ] **Phase 7: UI/UX Polish & Deployment**
     - [x] Header should not show menu Icon
-    - [ ] Fix UI colors and ensure it works in both light and dark modes and layout
+    - [x] Fix UI colors and ensure it works in both light and dark modes and layout
     - [x] Apply Mobile-first responsive design
     - [ ] Add animations and transitions
     - [ ] Fix typing errors
     - [ ] Bug fixes
 
-- [ ] **Phase 8: Future Enhancements**
+- [ ] **Phase 8: Integrate MeTube**
+  - [ ] Integrate MeTube to automatically start downloading the video when the request is submitted
+  - [ ] Setup syncthing
+
+
+- [ ] **Phase 9: Future Enhancements**
   - [ ] Feedback sentiment Thumbs up/down
   - [ ] Dynamic Avatars
 

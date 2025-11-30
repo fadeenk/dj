@@ -118,9 +118,9 @@ async function handleRequestSubmit(data: {
 
 <template>
   <UContainer>
-    <div class="relative flex min-h-screen w-full flex-col bg-background-dark">
+    <div class="relative flex min-h-screen w-full flex-col">
       <!-- Main Content -->
-      <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-white">
+      <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-gray-900 dark:text-white">
         <!-- Loading State -->
         <div
           v-if="loading"
@@ -143,7 +143,7 @@ async function handleRequestSubmit(data: {
               class="text-4xl text-red-500"
             />
           </div>
-          <h2 class="text-xl font-bold text-white">
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white">
             {{ error }}
           </h2>
           <UButton
@@ -160,7 +160,7 @@ async function handleRequestSubmit(data: {
           <!-- Song Requests -->
           <div class="flex flex-col gap-4">
             <div class="flex items-center justify-between">
-              <h3 class="text-lg font-bold text-white">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-white">
                 Song Requests
               </h3>
               <GradientButton

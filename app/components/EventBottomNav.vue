@@ -10,13 +10,13 @@ const isInfoActive = computed(() => route.path === `/event/${code}/info`)
 </script>
 
 <template>
-  <nav class="fixed bottom-0 z-20 w-full border-t border-white/10 bg-background-dark/80 backdrop-blur-sm">
+  <nav class="fixed bottom-0 z-20 w-full border-t border-gray-200 backdrop-blur-sm dark:border-white/10">
     <UContainer>
       <div class="flex h-20 items-center justify-around">
         <NuxtLink
           :to="`/event/${code}`"
           class="flex flex-col items-center gap-1 transition-colors"
-          :class="isRequestsActive ? 'text-primary' : 'text-white/70'"
+          :class="isRequestsActive ? 'text-primary' : 'text-gray-500 dark:text-white/70'"
         >
           <UIcon
             name="i-heroicons-musical-note"
@@ -29,7 +29,7 @@ const isInfoActive = computed(() => route.path === `/event/${code}/info`)
         <NuxtLink
           :to="`/event/${code}/feedback`"
           class="flex flex-col items-center gap-1 transition-colors"
-          :class="isFeedbackActive ? 'text-primary' : 'text-white/70'"
+          :class="isFeedbackActive ? 'text-primary' : 'text-gray-500 dark:text-white/70'"
         >
           <UIcon
             name="i-heroicons-chat-bubble-left-ellipsis"
@@ -42,7 +42,7 @@ const isInfoActive = computed(() => route.path === `/event/${code}/info`)
         <NuxtLink
           :to="`/event/${code}/tips`"
           class="flex flex-col items-center gap-1 transition-colors"
-          :class="isTipsActive ? 'text-primary' : 'text-white/70'"
+          :class="isTipsActive ? 'text-primary' : 'text-gray-500 dark:text-white/70'"
         >
           <UIcon
             name="i-lucide-hand-coins"
@@ -55,7 +55,7 @@ const isInfoActive = computed(() => route.path === `/event/${code}/info`)
         <NuxtLink
           :to="`/event/${code}/info`"
           class="flex flex-col items-center gap-1 transition-colors"
-          :class="isInfoActive ? 'text-primary' : 'text-white/70'"
+          :class="isInfoActive ? 'text-primary' : 'text-gray-500 dark:text-white/70'"
         >
           <UIcon
             name="i-heroicons-information-circle"

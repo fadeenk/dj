@@ -1,6 +1,17 @@
 <script setup lang="ts">
 const supabase = useSupabaseClient()
-const events = ref([])
+interface Event {
+  id: string
+  name: string
+  code: string
+  location: string | null
+  start_time: string
+  end_time: string | null
+  description: string | null
+  is_active: boolean | null
+}
+
+const events = ref<Event[]>([])
 const loading = ref(true)
 
 onMounted(async () => {
@@ -30,7 +41,7 @@ onMounted(async () => {
   <div>
     <UContainer>
       <div
-        class="text-lg sm:text-xl/8 text-muted text-balance py-8 text-center"
+        class="text-lg text-gray-500 text-balance py-8 text-center dark:text-muted sm:text-xl/8"
       >
         Find your event, request your favorite songs, and keep the party going.
       </div>

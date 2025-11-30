@@ -123,9 +123,9 @@ onMounted(() => {
 
 <template>
   <UContainer>
-    <div class="relative flex min-h-screen w-full flex-col bg-background-dark">
+    <div class="relative flex min-h-screen w-full flex-col">
     <!-- Main Content -->
-    <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-white">
+    <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-gray-900 dark:text-white">
       <!-- Loading State -->
       <div
         v-if="loading"
@@ -148,7 +148,7 @@ onMounted(() => {
             class="text-4xl text-red-500"
           />
         </div>
-        <h2 class="text-xl font-bold text-white">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
           {{ error }}
         </h2>
         <UButton
@@ -163,8 +163,8 @@ onMounted(() => {
       <!-- Event Info Content -->
       <template v-else-if="event">
         <!-- Event Title -->
-        <div class="rounded-lg bg-white/5 p-4">
-          <h2 class="text-2xl font-bold tracking-tight text-white">
+        <div class="rounded-lg bg-gray-100 p-4 dark:bg-white/5">
+          <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {{ event.name }}
           </h2>
           <p
@@ -176,7 +176,7 @@ onMounted(() => {
         </div>
 
         <!-- Event Details -->
-        <div class="flex flex-col gap-4 rounded-lg bg-white/5 p-4">
+        <div class="flex flex-col gap-4 rounded-lg bg-gray-100 p-4 dark:bg-white/5">
           <!-- Date -->
           <div class="flex items-center gap-4">
             <UIcon
@@ -184,10 +184,10 @@ onMounted(() => {
               class="text-2xl text-primary"
             />
             <div class="flex flex-col">
-              <p class="text-sm font-normal text-white/70">
+              <p class="text-sm font-normal text-gray-600 dark:text-white/70">
                 Date
               </p>
-              <p class="text-base font-medium text-white">
+              <p class="text-base font-medium text-gray-900 dark:text-white">
                 {{ formattedDate }}
               </p>
             </div>
@@ -203,10 +203,10 @@ onMounted(() => {
               class="text-2xl text-primary"
             />
             <div class="flex flex-col">
-              <p class="text-sm font-normal text-white/70">
+              <p class="text-sm font-normal text-gray-600 dark:text-white/70">
                 Time
               </p>
-              <p class="text-base font-medium text-white">
+              <p class="text-base font-medium text-gray-900 dark:text-white">
                 {{ formattedTime }}
               </p>
             </div>
@@ -222,10 +222,10 @@ onMounted(() => {
               class="text-2xl text-primary"
             />
             <div class="flex flex-col">
-              <p class="text-sm font-normal text-white/70">
+              <p class="text-sm font-normal text-gray-600 dark:text-white/70">
                 Location
               </p>
-              <p class="text-base font-medium text-white">
+              <p class="text-base font-medium text-gray-900 dark:text-white">
                 {{ event.location }}
               </p>
             </div>
@@ -235,12 +235,12 @@ onMounted(() => {
         <!-- About the Event -->
         <div
           v-if="event.description"
-          class="flex flex-col gap-2 rounded-lg bg-white/5 p-4"
+          class="flex flex-col gap-2 rounded-lg bg-gray-100 p-4 dark:bg-white/5"
         >
-          <h3 class="text-lg font-bold text-white">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">
             About the Event
           </h3>
-          <p class="text-sm font-normal leading-normal text-white/70">
+          <p class="text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
             {{ event.description }}
           </p>
         </div>
@@ -248,12 +248,12 @@ onMounted(() => {
         <!-- House Rules -->
         <div
           v-if="houseRules.length > 0"
-          class="flex flex-col gap-2 rounded-lg bg-white/5 p-4"
+          class="flex flex-col gap-2 rounded-lg bg-gray-100 p-4 dark:bg-white/5"
         >
-          <h3 class="text-lg font-bold text-white">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">
             House Rules
           </h3>
-          <ul class="list-inside list-disc space-y-2 pl-1 text-sm font-normal leading-normal text-white/70">
+          <ul class="list-inside list-disc space-y-2 pl-1 text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
             <li
               v-for="(rule, index) in houseRules"
               :key="index"
