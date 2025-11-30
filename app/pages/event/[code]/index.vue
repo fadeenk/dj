@@ -117,6 +117,7 @@ async function handleRequestSubmit(data: {
 </script>
 
 <template>
+  <UContainer>
   <div class="relative flex min-h-screen w-full flex-col bg-background-dark">
     <!-- Main Content -->
     <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-white">
@@ -186,6 +187,7 @@ async function handleRequestSubmit(data: {
       </template>
     </main>
   </div>
+  </UContainer>
 </template>
 
 <style scoped>

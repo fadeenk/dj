@@ -166,7 +166,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-4xl p-4">
+  <UContainer class="p-4">
     <!-- Header -->
     <div class="mb-6 flex items-center justify-between">
       <h1 class="text-2xl font-bold">
@@ -224,5 +224,5 @@ onMounted(() => {
         </p>
       </div>
     </div>
-  </div>
+  </UContainer>
 </template>

@@ -91,6 +91,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <UContainer>
   <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-dark">
     <!-- Subtitle -->
     <div class="px-4 py-2">
@@ -141,6 +142,7 @@ onMounted(() => {
     </div>
 
   </div>
+  </UContainer>
 </template>
 
 <style scoped>

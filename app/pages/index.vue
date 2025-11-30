@@ -28,13 +28,12 @@ onMounted(async () => {
 
 <template>
   <div>
-        <UContainer>
-
-    <div
-      class="text-lg sm:text-xl/8 text-muted text-balance py-8 text-center"
-    >
-      Find your event, request your favorite songs, and keep the party going.
-    </div>
+    <UContainer>
+      <div
+        class="text-lg sm:text-xl/8 text-muted text-balance py-8 text-center"
+      >
+        Find your event, request your favorite songs, and keep the party going.
+      </div>
     </UContainer>
 
     <UContainer>

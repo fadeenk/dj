@@ -292,7 +292,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-4 max-w-4xl mx-auto">
+  <UContainer class="pt-4">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold">
         Event Management
@@ -557,5 +557,5 @@ onMounted(() => {
         </div>
       </template>
     </UModal>
-  </div>
+  </UContainer>
 </template>

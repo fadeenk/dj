@@ -43,9 +43,9 @@
     - [x] Update footer
     
 - [ ] **Phase 7: UI/UX Polish & Deployment**
-    - [ ] Header should not show menu Icon
+    - [x] Header should not show menu Icon
     - [ ] Fix UI colors and ensure it works in both light and dark modes and layout
-    - [ ] Apply Mobile-first responsive design
+    - [x] Apply Mobile-first responsive design
     - [ ] Add animations and transitions
     - [ ] Fix typing errors
     - [ ] Bug fixes

@@ -122,7 +122,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative flex min-h-screen w-full flex-col bg-background-dark">
+  <UContainer>
+    <div class="relative flex min-h-screen w-full flex-col bg-background-dark">
     <!-- Main Content -->
     <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-white">
       <!-- Loading State -->
@@ -264,6 +265,7 @@ onMounted(() => {
       </template>
     </main>
   </div>
+  </UContainer>
 </template>
 
 <style scoped>
