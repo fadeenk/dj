@@ -13,11 +13,10 @@ interface Event {
   id: string
   name: string
   code: string
-  date: string
   is_active: boolean | null
   dj_id: string
   location?: string | null
-  start_time?: string | null
+  start_time: string
   end_time?: string | null
   description?: string | null
   house_rules?: string | null
@@ -36,8 +35,8 @@ const newEvent = ref({
   date: new Date().toISOString().split('T')[0],
   is_active: true,
   location: '',
-  start_time: '',
-  end_time: '',
+  start_time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+  end_time: '23:59',
   description: '',
   house_rules: ''
 })
@@ -50,10 +49,11 @@ async function fetchEvents() {
     const { data, error } = await supabase
       .from('events')
       .select('*')
-      .order('date', { ascending: false })
+      .order('start_time', { ascending: false })
 
     if (error) throw error
-    events.value = data || []
+    if (error) throw error
+    events.value = (data as unknown as Event[]) || []
   } catch (error: any) {
     toast.add({
       title: 'Error fetching events',
@@ -81,16 +81,24 @@ async function createEvent() {
     const userId = sessionData.session.user.id
     console.log('User ID from session:', userId)
 
+    // Combine date and time
+    const startDateTime = new Date(`${newEvent.value.date}T${newEvent.value.start_time}`)
+    const endDateTime = new Date(`${newEvent.value.date}T${newEvent.value.end_time}`)
+
+    // Handle next day logic
+    if (endDateTime < startDateTime) {
+      endDateTime.setDate(endDateTime.getDate() + 1)
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const eventData: any = {
       name: newEvent.value.name,
       code: newEvent.value.code,
-      date: newEvent.value.date,
       is_active: newEvent.value.is_active,
       dj_id: userId,
       location: newEvent.value.location || null,
-      start_time: newEvent.value.start_time || null,
-      end_time: newEvent.value.end_time || null,
+      start_time: startDateTime.toISOString(),
+      end_time: endDateTime.toISOString(),
       description: newEvent.value.description || null,
       house_rules: newEvent.value.house_rules || null
     }
@@ -106,7 +114,7 @@ async function createEvent() {
 
     if (error) throw error
 
-    events.value.unshift(data)
+    events.value.unshift(data as unknown as Event)
     isCreateModalOpen.value = false
     newEvent.value = {
       name: '',
@@ -114,8 +122,8 @@ async function createEvent() {
       date: new Date().toISOString().split('T')[0],
       is_active: true,
       location: '',
-      start_time: '',
-      end_time: '',
+      start_time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+      end_time: '23:59',
       description: '',
       house_rules: ''
     }
@@ -348,7 +356,7 @@ onMounted(() => {
                 Code: {{ event.code }}
               </p>
               <p class="text-sm text-gray-500">
-                Date: {{ new Date(event.date).toLocaleDateString() }}
+                Date: {{ new Date(event.start_time).toLocaleDateString() }}
               </p>
             </div>
             <div class="flex items-center gap-2">

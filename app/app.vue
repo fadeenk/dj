@@ -18,10 +18,27 @@ useSeoMeta({
   title,
   description,
   ogTitle: title,
-  ogDescription: description,
+  ogDescription: description
   // ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
   // twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
   // twitterCard: 'summary_large_image'
+})
+
+const route = useRoute()
+const eventTitle = useState('eventTitle', () => 'Event')
+
+const pageTitle = computed(() => {
+  if (route.path === '/') return ''
+  if (route.path.startsWith('/admin/dashboard')) return 'Admin Dashboard'
+  if (route.path.startsWith('/admin/login')) return 'Admin Login'
+
+  // Event pages
+  if (route.path.includes('/feedback')) return 'Send Feedback to the DJ'
+  if (route.path.includes('/tips')) return 'Tip DJ'
+  if (route.path.startsWith('/event/')) return eventTitle.value
+
+  if (route.path.startsWith('/debug')) return 'Debug'
+  return ''
 })
 </script>
 
@@ -30,6 +47,10 @@ useSeoMeta({
     <UHeader>
       <template #left>
         <UserProfileDisplay />
+      </template>
+
+      <template #default>
+        <h1>{{ pageTitle }}</h1>
       </template>
 
       <template #right>
@@ -41,25 +62,9 @@ useSeoMeta({
       <NuxtPage />
     </UMain>
 
-    <USeparator icon="i-simple-icons-nuxtdotjs" />
-
     <UFooter>
-      <template #left>
-        <p class="text-sm text-muted">
-          Built with Nuxt UI • © {{ new Date().getFullYear() }}
-        </p>
-      </template>
-
-      <template #right>
-        <UButton
-          to="https://github.com/nuxt-ui-templates/starter"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
-      </template>
+      <!-- Bottom Navigation -->
+      <EventBottomNav v-if="route.path.startsWith('/event/')" />
     </UFooter>
   </UApp>
 </template>

@@ -1,9 +1,10 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (process.server) return
+  if (import.meta.server) return
 
-  const guestId = useCookie('guest_user_id')
+  const guestId = ref(localStorage.getItem('guestUserId'))
 
   if (!guestId.value) {
     guestId.value = crypto.randomUUID()
+    localStorage.setItem('guestUserId', guestId.value)
   }
 })

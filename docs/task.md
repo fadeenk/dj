@@ -31,17 +31,19 @@
       - [x] Zelle fadeekannah@gmail.com
     - [x] Implement Feedback/Sentiment system
 
-- [ ] **Phase 6: Enhancements**
+- [x] **Phase 6: Enhancements**
     - [x] Landing page list active events today
     - [x] Make event url case insensitive
-    - [ ] Cleanup app header have page title, home show nothing
+    - [x] Cleanup app header have page title, home show nothing
     - [x] Guest users have random animal name and avatar
     - [x] Guest user can change name and avatar
     - [x] Make sure the correct name is used when requesting and submitting feedback
-    - [ ] submitting request should save id and name in supabase
-    - [ ] Create event use timezone and use start and end times 
+    - [x] submitting request should save id and name in supabase
+    - [x] Create event use timezone and use start and end times 
+    - [x] Update footer
     
 - [ ] **Phase 7: UI/UX Polish & Deployment**
+    - [ ] Header should not show menu Icon
     - [ ] Fix UI colors and ensure it works in both light and dark modes and layout
     - [ ] Apply Mobile-first responsive design
     - [ ] Add animations and transitions

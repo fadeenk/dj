@@ -93,19 +93,6 @@ onMounted(() => {
 
 <template>
   <div class="relative flex min-h-screen w-full flex-col bg-background-dark text-white">
-    <!-- Header -->
-    <header class="sticky top-0 z-10 flex items-center bg-background-dark/80 p-4 backdrop-blur-sm">
-      <button
-        class="absolute left-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10"
-        @click="goBack"
-      >
-        <UIcon name="i-heroicons-arrow-left" />
-      </button>
-      <h1 class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em]">
-        Tip DJ
-      </h1>
-    </header>
-
     <!-- Loading State -->
     <div v-if="loading" class="flex flex-1 items-center justify-center">
       <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />

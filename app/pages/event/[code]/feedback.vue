@@ -8,7 +8,6 @@ const code = route.params.code as string
 const loading = ref(true)
 const submitting = ref(false)
 const feedbackMessage = ref('')
-const maxChars = 140
 
 interface EventData {
   id: string
@@ -43,13 +42,6 @@ async function fetchEvent() {
   }
 }
 
-// Character count
-const remainingChars = computed(() => maxChars - feedbackMessage.value.length)
-const charCountColor = computed(() => {
-  if (remainingChars.value < 20) return 'text-red-400'
-  if (remainingChars.value < 50) return 'text-yellow-400'
-  return 'text-white/40'
-})
 
 // Submit feedback
 async function submitFeedback() {
@@ -92,10 +84,6 @@ async function submitFeedback() {
   }
 }
 
-// Handle back navigation
-function goBack() {
-  router.push(`/event/${code}`)
-}
 
 onMounted(() => {
   fetchEvent()
@@ -104,61 +92,54 @@ onMounted(() => {
 
 <template>
   <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-dark">
-    <!-- Header -->
-    <div class="flex items-center p-4">
-      <button
-        class="flex size-12 shrink-0 items-center justify-start text-white/90"
-        @click="goBack"
-      >
-        <UIcon name="i-heroicons-arrow-left" class="text-3xl" />
-      </button>
-      <h2 class="flex-1 pr-12 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-white">
-        Send Feedback to the DJ
-      </h2>
-    </div>
-
     <!-- Subtitle -->
-    <div class="px-4 pb-2">
+    <div class="px-4 py-2">
       <p class="text-center text-sm font-normal leading-normal text-white/60">
-        Your feedback is sent directly and anonymously to the DJ.
+        Your feedback is sent directly to the DJ.
       </p>
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading" class="flex flex-1 items-center justify-center">
-      <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl text-white" />
+    <div
+      v-if="loading"
+      class="flex flex-1 items-center justify-center"
+    >
+      <UIcon
+        name="i-heroicons-arrow-path"
+        class="animate-spin text-2xl text-white"
+      />
     </div>
 
     <!-- Feedback Form -->
-    <div v-else class="flex flex-1 flex-col px-4 pt-4">
-      <div class="flex flex-1 flex-col">
-        <label class="flex flex-1 flex-col">
-          <textarea
-            v-model="feedbackMessage"
-            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border-none bg-white/5 p-4 text-base font-normal leading-normal text-white/90 placeholder:text-white/40 focus:border-none focus:outline-0 focus:ring-2 focus:ring-primary/50"
-            placeholder="Loving the vibe! Any chance you can play some funk?"
-            :maxlength="maxChars"
+    <div
+      v-else
+      class="flex flex-2 flex-col px-4 py-4"
+    >
+      <label>
+        <textarea
+          v-model="feedbackMessage"
+          class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border-none bg-white/5 p-4 text-base font-normal leading-normal text-white/90 placeholder:text-white/40 focus:border-none focus:outline-0 focus:ring-2 focus:ring-primary/50"
+          placeholder="Loving the vibe! Any chance you can play some funk?"
+          rows="5"
+        />
+      </label>
+      <!-- Submit Button -->
+      <div class="w-full bg-background-dark px-4 pb-6 pt-3">
+        <button
+          class="flex h-14 w-full max-w-full cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary px-5 text-base font-bold leading-normal tracking-[0.015em] text-white shadow-lg shadow-secondary/30 disabled:cursor-not-allowed disabled:opacity-50"
+          :disabled="!feedbackMessage.trim() || submitting"
+          @click="submitFeedback"
+        >
+          <UIcon
+            v-if="submitting"
+            name="i-heroicons-arrow-path"
+            class="mr-2 animate-spin"
           />
-        </label>
-      </div>
-      <div class="flex justify-end pt-2">
-        <p :class="['text-sm font-normal leading-normal', charCountColor]">
-          {{ remainingChars }}/{{ maxChars }}
-        </p>
+          <span class="truncate">{{ submitting ? 'Sending...' : 'Send' }}</span>
+        </button>
       </div>
     </div>
 
-    <!-- Submit Button (Sticky) -->
-    <div class="sticky bottom-0 w-full bg-background-dark px-4 pb-6 pt-3">
-      <button
-        class="flex h-14 w-full max-w-full cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary px-5 text-base font-bold leading-normal tracking-[0.015em] text-white shadow-lg shadow-secondary/30 disabled:cursor-not-allowed disabled:opacity-50"
-        :disabled="!feedbackMessage.trim() || submitting"
-        @click="submitFeedback"
-      >
-        <UIcon v-if="submitting" name="i-heroicons-arrow-path" class="mr-2 animate-spin" />
-        <span class="truncate">{{ submitting ? 'Sending...' : 'Send' }}</span>
-      </button>
-    </div>
   </div>
 </template>
 
