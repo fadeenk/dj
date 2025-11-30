@@ -94,23 +94,41 @@ onMounted(() => {
 <template>
   <div class="relative flex min-h-screen w-full flex-col text-gray-900 dark:text-white">
     <!-- Loading State -->
-    <div v-if="loading" class="flex flex-1 items-center justify-center">
-      <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
+    <div
+      v-if="loading"
+      class="flex flex-1 items-center justify-center"
+    >
+      <UIcon
+        name="i-heroicons-arrow-path"
+        class="animate-spin text-2xl"
+      />
     </div>
 
     <!-- Main Content -->
-    <main v-else class="flex flex-1 flex-col items-center px-4 pt-8">
+    <main
+      v-else
+      class="flex flex-1 flex-col items-center px-4 pt-8"
+    >
       <!-- DJ Avatar with Gradient Border -->
       <div class="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary p-1 shadow-[0_0_30px_rgba(45,156,219,0.5),0_0_30px_rgba(248,28,154,0.4)]">
-        <div v-if="djAvatar" class="h-full w-full overflow-hidden rounded-full">
+        <div
+          v-if="djAvatar"
+          class="h-full w-full overflow-hidden rounded-full"
+        >
           <img
             :src="djAvatar"
             :alt="`${djName} avatar`"
             class="h-full w-full object-cover"
           >
         </div>
-        <div v-else class="flex h-full w-full items-center justify-center rounded-full bg-gray-100 dark:bg-[#131022]">
-          <UIcon name="i-heroicons-user-circle" class="text-6xl text-primary" />
+        <div
+          v-else
+          class="flex h-full w-full items-center justify-center rounded-full bg-gray-100 dark:bg-[#131022]"
+        >
+          <UIcon
+            name="i-heroicons-user-circle"
+            class="text-6xl text-primary"
+          />
         </div>
       </div>
 
@@ -144,13 +162,19 @@ onMounted(() => {
             class="text-2xl"
           />
           <span class="text-lg font-semibold">{{ method.handle }}</span>
-          <UIcon name="i-heroicons-arrow-right" class="ml-auto text-gray-400 dark:text-white/50" />
+          <UIcon
+            name="i-heroicons-arrow-right"
+            class="ml-auto text-gray-400 dark:text-white/50"
+          />
         </a>
       </div>
 
       <!-- Cash Tips Message -->
       <div class="mt-8 flex items-center gap-3 rounded-full bg-gray-100 px-5 py-3 dark:bg-white/5">
-        <UIcon name="i-heroicons-banknotes" class="text-2xl text-primary" />
+        <UIcon
+          name="i-heroicons-banknotes"
+          class="text-2xl text-primary"
+        />
         <p class="font-medium text-gray-700 dark:text-white/80">
           Cash tips are also welcome!
         </p>

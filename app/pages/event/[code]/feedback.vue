@@ -42,7 +42,6 @@ async function fetchEvent() {
   }
 }
 
-
 // Submit feedback
 async function submitFeedback() {
   if (!event.value || !feedbackMessage.value.trim()) return
@@ -84,7 +83,6 @@ async function submitFeedback() {
   }
 }
 
-
 onMounted(() => {
   fetchEvent()
 })
@@ -92,53 +90,52 @@ onMounted(() => {
 
 <template>
   <UContainer>
-  <div class="relative flex h-auto min-h-screen w-full flex-col">
-    <!-- Subtitle -->
-    <div class="px-4 py-2">
-      <p class="text-center text-sm font-normal leading-normal text-gray-500 dark:text-white/60">
-        Your feedback is sent directly to the DJ.
-      </p>
-    </div>
+    <div class="relative flex h-auto min-h-screen w-full flex-col">
+      <!-- Subtitle -->
+      <div class="px-4 py-2">
+        <p class="text-center text-sm font-normal leading-normal text-gray-500 dark:text-white/60">
+          Your feedback is sent directly to the DJ.
+        </p>
+      </div>
 
-    <!-- Loading State -->
-    <div
-      v-if="loading"
-      class="flex flex-1 items-center justify-center"
-    >
-      <UIcon
-        name="i-heroicons-arrow-path"
-        class="animate-spin text-2xl text-primary dark:text-white"
-      />
-    </div>
-
-    <!-- Feedback Form -->
-    <div
-      v-else
-      class="flex flex-2 flex-col px-4 py-4"
-    >
-      <label>
-        <textarea
-          v-model="feedbackMessage"
-          class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border-none bg-gray-100 p-4 text-base font-normal leading-normal text-gray-900 placeholder:text-gray-400 focus:border-none focus:outline-0 focus:ring-2 focus:ring-primary/50 dark:bg-white/5 dark:text-white/90 dark:placeholder:text-white/40"
-          placeholder="Loving the vibe! Any chance you can play some funk?"
-          rows="5"
-        />
-      </label>
-      <!-- Submit Button -->
-      <div class="w-full px-4 pb-6 pt-3">
-        <GradientButton
-          label="Send"
-          variant="pill"
-          size="lg"
-          :loading="submitting"
-          :disabled="!feedbackMessage.trim() || submitting"
-          block
-          @click="submitFeedback"
+      <!-- Loading State -->
+      <div
+        v-if="loading"
+        class="flex flex-1 items-center justify-center"
+      >
+        <UIcon
+          name="i-heroicons-arrow-path"
+          class="animate-spin text-2xl text-primary dark:text-white"
         />
       </div>
-    </div>
 
-  </div>
+      <!-- Feedback Form -->
+      <div
+        v-else
+        class="flex flex-2 flex-col px-4 py-4"
+      >
+        <label>
+          <textarea
+            v-model="feedbackMessage"
+            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border-none bg-gray-100 p-4 text-base font-normal leading-normal text-gray-900 placeholder:text-gray-400 focus:border-none focus:outline-0 focus:ring-2 focus:ring-primary/50 dark:bg-white/5 dark:text-white/90 dark:placeholder:text-white/40"
+            placeholder="Loving the vibe! Any chance you can play some funk?"
+            rows="5"
+          />
+        </label>
+        <!-- Submit Button -->
+        <div class="w-full px-4 pb-6 pt-3">
+          <GradientButton
+            label="Send"
+            variant="pill"
+            size="lg"
+            :loading="submitting"
+            :disabled="!feedbackMessage.trim() || submitting"
+            block
+            @click="submitFeedback"
+          />
+        </div>
+      </div>
+    </div>
   </UContainer>
 </template>
 

@@ -10,7 +10,7 @@ function log(msg: string, data?: any) {
 
 async function runDebug() {
   log('Starting Debug...')
-  
+
   // 1. Check Session
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
   log('Initial Session:', sessionData)
@@ -45,7 +45,7 @@ async function runDebug() {
     .from('djs')
     .select('*')
     .eq('id', userData.user.id)
-  
+
   log('DJ Record:', djData)
   if (djError) log('DJ Error:', djError)
 
@@ -63,7 +63,7 @@ async function runDebug() {
     .from('events')
     .insert(eventData)
     .select()
-  
+
   if (insertError) {
     log('INSERT FAILED:', insertError)
   } else {
@@ -78,7 +78,9 @@ onMounted(() => {
 
 <template>
   <div class="p-8">
-    <h1 class="text-2xl font-bold mb-4">Supabase Debug</h1>
+    <h1 class="text-2xl font-bold mb-4">
+      Supabase Debug
+    </h1>
     <pre class="bg-gray-100 p-4 rounded overflow-auto h-[800px] text-xs">{{ logs.join('\n') }}</pre>
   </div>
 </template>

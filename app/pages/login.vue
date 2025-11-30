@@ -17,7 +17,7 @@ watchEffect(() => {
 const handleLogin = async () => {
   loading.value = true
   errorMsg.value = ''
-  
+
   const { error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value
@@ -26,7 +26,7 @@ const handleLogin = async () => {
   if (error) {
     errorMsg.value = error.message
   }
-  
+
   loading.value = false
 }
 </script>
@@ -39,10 +39,16 @@ const handleLogin = async () => {
           DJ Login
         </h2>
       </div>
-      <form class="mt-8 space-y-6" @submit.prevent="handleLogin">
+      <form
+        class="mt-8 space-y-6"
+        @submit.prevent="handleLogin"
+      >
         <div class="-space-y-px rounded-md shadow-sm">
           <div>
-            <label for="email-address" class="sr-only">Email address</label>
+            <label
+              for="email-address"
+              class="sr-only"
+            >Email address</label>
             <input
               id="email-address"
               v-model="email"
@@ -52,10 +58,13 @@ const handleLogin = async () => {
               required
               class="relative block w-full rounded-t-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
               placeholder="Email address"
-            />
+            >
           </div>
           <div>
-            <label for="password" class="sr-only">Password</label>
+            <label
+              for="password"
+              class="sr-only"
+            >Password</label>
             <input
               id="password"
               v-model="password"
@@ -65,11 +74,14 @@ const handleLogin = async () => {
               required
               class="relative block w-full rounded-b-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
               placeholder="Password"
-            />
+            >
           </div>
         </div>
 
-        <div v-if="errorMsg" class="text-red-500 text-sm text-center">
+        <div
+          v-if="errorMsg"
+          class="text-red-500 text-sm text-center"
+        >
           {{ errorMsg }}
         </div>
 

@@ -85,7 +85,10 @@ async function handleLogout() {
 
     <template #content>
       <!-- Authenticated User Content -->
-      <div v-if="user" class="p-4 space-y-4">
+      <div
+        v-if="user"
+        class="p-4 space-y-4"
+      >
         <h3 class="text-lg font-bold">
           Account
         </h3>
@@ -105,7 +108,10 @@ async function handleLogout() {
       </div>
 
       <!-- Guest User Content -->
-      <div v-else class="p-4 space-y-4">
+      <div
+        v-else
+        class="p-4 space-y-4"
+      >
         <h3 class="text-lg font-bold">
           Change Your Name
         </h3>

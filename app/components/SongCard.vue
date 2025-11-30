@@ -41,7 +41,10 @@ async function handleVote() {
 </script>
 
 <template>
-  <div class="gradient-border-wrapper" :style="{ animationDelay }">
+  <div
+    class="gradient-border-wrapper"
+    :style="{ animationDelay }"
+  >
     <div class="relative flex flex-col gap-3 rounded-xl bg-white/5 p-4 transition-all hover:bg-white/10">
       <div class="flex items-start gap-4">
         <!-- Thumbnail -->

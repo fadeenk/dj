@@ -124,147 +124,147 @@ onMounted(() => {
 <template>
   <UContainer>
     <div class="relative flex min-h-screen w-full flex-col">
-    <!-- Main Content -->
-    <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-gray-900 dark:text-white">
-      <!-- Loading State -->
-      <div
-        v-if="loading"
-        class="flex justify-center py-8"
-      >
-        <UIcon
-          name="i-heroicons-arrow-path"
-          class="animate-spin text-2xl"
-        />
-      </div>
-
-      <!-- Error State -->
-      <div
-        v-else-if="error"
-        class="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center"
-      >
-        <div class="rounded-full bg-red-500/10 p-4">
+      <!-- Main Content -->
+      <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-gray-900 dark:text-white">
+        <!-- Loading State -->
+        <div
+          v-if="loading"
+          class="flex justify-center py-8"
+        >
           <UIcon
-            name="i-heroicons-exclamation-triangle"
-            class="text-4xl text-red-500"
+            name="i-heroicons-arrow-path"
+            class="animate-spin text-2xl"
           />
         </div>
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-          {{ error }}
-        </h2>
-        <UButton
-          to="/"
-          color="primary"
-          variant="solid"
-          label="Go Home"
-          class="mt-4"
-        />
-      </div>
 
-      <!-- Event Info Content -->
-      <template v-else-if="event">
-        <!-- Event Title -->
-        <div class="rounded-lg bg-gray-100 p-4 dark:bg-white/5">
-          <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {{ event.name }}
+        <!-- Error State -->
+        <div
+          v-else-if="error"
+          class="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center"
+        >
+          <div class="rounded-full bg-red-500/10 p-4">
+            <UIcon
+              name="i-heroicons-exclamation-triangle"
+              class="text-4xl text-red-500"
+            />
+          </div>
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+            {{ error }}
           </h2>
-          <p
-            v-if="event.djs?.username"
-            class="mt-1 text-base font-normal text-primary"
-          >
-            with DJ {{ event.djs.username }}
-          </p>
+          <UButton
+            to="/"
+            color="primary"
+            variant="solid"
+            label="Go Home"
+            class="mt-4"
+          />
         </div>
 
-        <!-- Event Details -->
-        <div class="flex flex-col gap-4 rounded-lg bg-gray-100 p-4 dark:bg-white/5">
-          <!-- Date -->
-          <div class="flex items-center gap-4">
-            <UIcon
-              name="i-heroicons-calendar"
-              class="text-2xl text-primary"
-            />
-            <div class="flex flex-col">
-              <p class="text-sm font-normal text-gray-600 dark:text-white/70">
-                Date
-              </p>
-              <p class="text-base font-medium text-gray-900 dark:text-white">
-                {{ formattedDate }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Time -->
-          <div
-            v-if="formattedTime"
-            class="flex items-center gap-4"
-          >
-            <UIcon
-              name="i-heroicons-clock"
-              class="text-2xl text-primary"
-            />
-            <div class="flex flex-col">
-              <p class="text-sm font-normal text-gray-600 dark:text-white/70">
-                Time
-              </p>
-              <p class="text-base font-medium text-gray-900 dark:text-white">
-                {{ formattedTime }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Location -->
-          <div
-            v-if="event.location"
-            class="flex items-center gap-4"
-          >
-            <UIcon
-              name="i-heroicons-map-pin"
-              class="text-2xl text-primary"
-            />
-            <div class="flex flex-col">
-              <p class="text-sm font-normal text-gray-600 dark:text-white/70">
-                Location
-              </p>
-              <p class="text-base font-medium text-gray-900 dark:text-white">
-                {{ event.location }}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- About the Event -->
-        <div
-          v-if="event.description"
-          class="flex flex-col gap-2 rounded-lg bg-gray-100 p-4 dark:bg-white/5"
-        >
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white">
-            About the Event
-          </h3>
-          <p class="text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
-            {{ event.description }}
-          </p>
-        </div>
-
-        <!-- House Rules -->
-        <div
-          v-if="houseRules.length > 0"
-          class="flex flex-col gap-2 rounded-lg bg-gray-100 p-4 dark:bg-white/5"
-        >
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white">
-            House Rules
-          </h3>
-          <ul class="list-inside list-disc space-y-2 pl-1 text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
-            <li
-              v-for="(rule, index) in houseRules"
-              :key="index"
+        <!-- Event Info Content -->
+        <template v-else-if="event">
+          <!-- Event Title -->
+          <div class="rounded-lg bg-gray-100 p-4 dark:bg-white/5">
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {{ event.name }}
+            </h2>
+            <p
+              v-if="event.djs?.username"
+              class="mt-1 text-base font-normal text-primary"
             >
-              {{ rule }}
-            </li>
-          </ul>
-        </div>
-      </template>
-    </main>
-  </div>
+              with DJ {{ event.djs.username }}
+            </p>
+          </div>
+
+          <!-- Event Details -->
+          <div class="flex flex-col gap-4 rounded-lg bg-gray-100 p-4 dark:bg-white/5">
+            <!-- Date -->
+            <div class="flex items-center gap-4">
+              <UIcon
+                name="i-heroicons-calendar"
+                class="text-2xl text-primary"
+              />
+              <div class="flex flex-col">
+                <p class="text-sm font-normal text-gray-600 dark:text-white/70">
+                  Date
+                </p>
+                <p class="text-base font-medium text-gray-900 dark:text-white">
+                  {{ formattedDate }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Time -->
+            <div
+              v-if="formattedTime"
+              class="flex items-center gap-4"
+            >
+              <UIcon
+                name="i-heroicons-clock"
+                class="text-2xl text-primary"
+              />
+              <div class="flex flex-col">
+                <p class="text-sm font-normal text-gray-600 dark:text-white/70">
+                  Time
+                </p>
+                <p class="text-base font-medium text-gray-900 dark:text-white">
+                  {{ formattedTime }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div
+              v-if="event.location"
+              class="flex items-center gap-4"
+            >
+              <UIcon
+                name="i-heroicons-map-pin"
+                class="text-2xl text-primary"
+              />
+              <div class="flex flex-col">
+                <p class="text-sm font-normal text-gray-600 dark:text-white/70">
+                  Location
+                </p>
+                <p class="text-base font-medium text-gray-900 dark:text-white">
+                  {{ event.location }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- About the Event -->
+          <div
+            v-if="event.description"
+            class="flex flex-col gap-2 rounded-lg bg-gray-100 p-4 dark:bg-white/5"
+          >
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+              About the Event
+            </h3>
+            <p class="text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
+              {{ event.description }}
+            </p>
+          </div>
+
+          <!-- House Rules -->
+          <div
+            v-if="houseRules.length > 0"
+            class="flex flex-col gap-2 rounded-lg bg-gray-100 p-4 dark:bg-white/5"
+          >
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+              House Rules
+            </h3>
+            <ul class="list-inside list-disc space-y-2 pl-1 text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
+              <li
+                v-for="(rule, index) in houseRules"
+                :key="index"
+              >
+                {{ rule }}
+              </li>
+            </ul>
+          </div>
+        </template>
+      </main>
+    </div>
   </UContainer>
 </template>
 

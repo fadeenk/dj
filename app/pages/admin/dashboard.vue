@@ -394,7 +394,10 @@ onMounted(() => {
             variant="soft"
           >
             <template #requests>
-              <RequestQueue :event-id="event.id" is-admin />
+              <RequestQueue
+                :event-id="event.id"
+                is-admin
+              />
             </template>
           </UAccordion>
         </div>

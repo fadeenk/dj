@@ -66,7 +66,6 @@ async function fetchFeedback() {
 
       if (updateError) console.error('Error marking feedback as read:', updateError)
     }
-
   } catch (error: any) {
     console.error('Error fetching feedback:', error)
     toast.add({
@@ -84,7 +83,7 @@ function formatTimestamp(timestamp: string) {
   const date = new Date(timestamp)
   const now = new Date()
   const isToday = date.toDateString() === now.toDateString()
-  
+
   const timeString = date.toLocaleTimeString('en-US', {
     hour: 'numeric',
     minute: '2-digit',
@@ -181,8 +180,14 @@ onMounted(() => {
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading" class="flex justify-center py-8">
-      <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
+    <div
+      v-if="loading"
+      class="flex justify-center py-8"
+    >
+      <UIcon
+        name="i-heroicons-arrow-path"
+        class="animate-spin text-2xl"
+      />
     </div>
 
     <!-- Empty State -->
@@ -190,7 +195,10 @@ onMounted(() => {
       v-else-if="feedbacks.length === 0"
       class="flex flex-col items-center justify-center gap-4 rounded-lg bg-white/5 p-12 text-center dark:bg-white/5"
     >
-      <UIcon name="i-heroicons-chat-bubble-left-ellipsis" class="text-4xl text-white/40" />
+      <UIcon
+        name="i-heroicons-chat-bubble-left-ellipsis"
+        class="text-4xl text-white/40"
+      />
       <p class="text-lg font-medium text-white/70">
         No feedback yet
       </p>
@@ -200,7 +208,10 @@ onMounted(() => {
     </div>
 
     <!-- Feedback List -->
-    <div v-else class="space-y-4">
+    <div
+      v-else
+      class="space-y-4"
+    >
       <div
         v-for="feedback in feedbacks"
         :key="feedback.id"
@@ -219,7 +230,10 @@ onMounted(() => {
             {{ formatTimestamp(feedback.created_at) }}
           </p>
         </div>
-        <p v-if="feedback.events?.name" class="text-xs text-white/50">
+        <p
+          v-if="feedback.events?.name"
+          class="text-xs text-white/50"
+        >
           Event: {{ feedback.events.name }}
         </p>
       </div>
