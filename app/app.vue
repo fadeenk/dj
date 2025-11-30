@@ -30,7 +30,7 @@ const eventTitle = useState('eventTitle', () => 'Event')
 const pageTitle = computed(() => {
   if (route.path === '/') return ''
   if (route.path.startsWith('/admin/dashboard')) return 'Admin Dashboard'
-  if (route.path.startsWith('/admin/login')) return 'Admin Login'
+  if (route.path.startsWith('/login')) return 'DJ Login'
 
   // Event pages
   if (route.path.includes('/feedback')) return 'Send Feedback to the DJ'
@@ -44,7 +44,10 @@ const pageTitle = computed(() => {
 
 <template>
   <UApp>
-    <UHeader>
+    <UHeader
+      :toggle="false"
+      :ui="{ center: 'flex' }"
+    >
       <template #left>
         <UserProfileDisplay />
       </template>
