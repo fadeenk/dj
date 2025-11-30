@@ -126,18 +126,15 @@ onMounted(() => {
       </label>
       <!-- Submit Button -->
       <div class="w-full bg-background-dark px-4 pb-6 pt-3">
-        <button
-          class="flex h-14 w-full max-w-full cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary px-5 text-base font-bold leading-normal tracking-[0.015em] text-white shadow-lg shadow-secondary/30 disabled:cursor-not-allowed disabled:opacity-50"
+        <GradientButton
+          label="Send"
+          variant="pill"
+          size="lg"
+          :loading="submitting"
           :disabled="!feedbackMessage.trim() || submitting"
+          block
           @click="submitFeedback"
-        >
-          <UIcon
-            v-if="submitting"
-            name="i-heroicons-arrow-path"
-            class="mr-2 animate-spin"
-          />
-          <span class="truncate">{{ submitting ? 'Sending...' : 'Send' }}</span>
-        </button>
+        />
       </div>
     </div>
 

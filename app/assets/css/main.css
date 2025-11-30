@@ -4,6 +4,9 @@
 @theme static {
   --font-sans: 'Be Vietnam Pro', sans-serif;
 
+  --color-primary: #00A9FF;
+  --color-secondary: #E800B8;
+
   --color-primary-50: #f0f9ff;
   --color-primary-100: #e0f2fe;
   --color-primary-200: #bae6fd;

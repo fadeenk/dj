@@ -118,75 +118,75 @@ async function handleRequestSubmit(data: {
 
 <template>
   <UContainer>
-  <div class="relative flex min-h-screen w-full flex-col bg-background-dark">
-    <!-- Main Content -->
-    <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-white">
-      <!-- Loading State -->
-      <div
-        v-if="loading"
-        class="flex justify-center py-8"
-      >
-        <UIcon
-          name="i-heroicons-arrow-path"
-          class="animate-spin text-2xl"
-        />
-      </div>
-
-      <!-- Error State -->
-      <div
-        v-else-if="error"
-        class="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center"
-      >
-        <div class="rounded-full bg-red-500/10 p-4">
+    <div class="relative flex min-h-screen w-full flex-col bg-background-dark">
+      <!-- Main Content -->
+      <main class="flex flex-1 flex-col gap-6 p-4 pb-28 text-white">
+        <!-- Loading State -->
+        <div
+          v-if="loading"
+          class="flex justify-center py-8"
+        >
           <UIcon
-            name="i-heroicons-exclamation-triangle"
-            class="text-4xl text-red-500"
+            name="i-heroicons-arrow-path"
+            class="animate-spin text-2xl"
           />
         </div>
-        <h2 class="text-xl font-bold text-white">
-          {{ error }}
-        </h2>
-        <UButton
-          to="/"
-          color="primary"
-          variant="solid"
-          label="Go Home"
-          class="mt-4"
-        />
-      </div>
 
-      <!-- Song Requests Content -->
-      <template v-else-if="event">
-        <!-- Song Requests -->
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center justify-between">
-            <h3 class="text-lg font-bold text-white">
-              Song Requests
-            </h3>
-            <UButton
-              v-if="!showRequestForm"
-              icon="i-heroicons-plus"
-              color="primary"
-              variant="solid"
-              label="Request Song"
-              @click="showRequestForm = true"
+        <!-- Error State -->
+        <div
+          v-else-if="error"
+          class="flex flex-1 flex-col items-center justify-center gap-4 p-8 text-center"
+        >
+          <div class="rounded-full bg-red-500/10 p-4">
+            <UIcon
+              name="i-heroicons-exclamation-triangle"
+              class="text-4xl text-red-500"
             />
           </div>
-
-          <RequestForm
-            v-if="showRequestForm"
-            :event-id="event.id"
-            @submit="handleRequestSubmit"
-            @cancel="showRequestForm = false"
-          />
-
-          <RequestQueue
-            :event-id="event.id"
+          <h2 class="text-xl font-bold text-white">
+            {{ error }}
+          </h2>
+          <UButton
+            to="/"
+            color="primary"
+            variant="solid"
+            label="Go Home"
+            class="mt-4"
           />
         </div>
-      </template>
-    </main>
-  </div>
+
+        <!-- Song Requests Content -->
+        <template v-else-if="event">
+          <!-- Song Requests -->
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-bold text-white">
+                Song Requests
+              </h3>
+              <GradientButton
+                v-if="!showRequestForm"
+                icon="i-heroicons-plus"
+                label="Request Song"
+                variant="rounded"
+                size="sm"
+                @click="showRequestForm = true"
+              />
+            </div>
+
+            <RequestForm
+              v-if="showRequestForm"
+              :event-id="event.id"
+              @submit="handleRequestSubmit"
+              @cancel="showRequestForm = false"
+            />
+
+            <RequestQueue
+              :event-id="event.id"
+            />
+          </div>
+        </template>
+      </main>
+    </div>
   </UContainer>
 </template>
 

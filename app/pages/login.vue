@@ -74,14 +74,15 @@ const handleLogin = async () => {
         </div>
 
         <div>
-          <button
-            type="submit"
+          <GradientButton
+            label="Sign in"
+            variant="rounded"
+            size="md"
+            :loading="loading"
             :disabled="loading"
-            class="group relative flex w-full justify-center rounded-md bg-primary-600 px-3 py-2 text-sm font-semibold text-white hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 disabled:opacity-50"
-          >
-            <span v-if="loading">Signing in...</span>
-            <span v-else>Sign in</span>
-          </button>
+            block
+            @click="handleLogin"
+          />
         </div>
       </form>
     </div>

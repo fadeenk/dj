@@ -125,10 +125,11 @@ function submitRequest() {
         :rows="2"
       />
 
-      <UButton
+      <GradientButton
         block
-        color="primary"
         label="Submit Request"
+        variant="rounded"
+        size="md"
         @click="submitRequest"
       />
     </div>

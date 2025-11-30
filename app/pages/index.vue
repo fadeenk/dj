@@ -115,13 +115,14 @@ onMounted(async () => {
           </div>
 
           <template #footer>
-            <UButton
-              block
-              color="primary"
-              variant="solid"
-              label="Join Event"
-              :to="`/event/${event.code}`"
-            />
+            <NuxtLink :to="`/event/${event.code}`">
+              <GradientButton
+                label="Join Event"
+                variant="rounded"
+                size="md"
+                block
+              />
+            </NuxtLink>
           </template>
         </UCard>
       </div>
