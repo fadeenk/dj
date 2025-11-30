@@ -1,3 +1,34 @@
+interface YouTubeThumbnail {
+  url: string
+  width: number
+  height: number
+}
+
+interface YouTubeThumbnails {
+  default: YouTubeThumbnail
+  medium: YouTubeThumbnail
+  high: YouTubeThumbnail
+}
+
+interface YouTubeVideoSnippet {
+  title: string
+  channelTitle: string
+  thumbnails: YouTubeThumbnails
+}
+
+interface YouTubeVideoId {
+  videoId: string
+}
+
+interface YouTubeSearchItem {
+  id: YouTubeVideoId
+  snippet: YouTubeVideoSnippet
+}
+
+interface YouTubeSearchResponse {
+  items: YouTubeSearchItem[]
+}
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const apiKey = config.youtubeApiKey
@@ -19,7 +50,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const response = await $fetch<{ items: any[] }>('https://www.googleapis.com/youtube/v3/search', {
+    const response = await $fetch<YouTubeSearchResponse>('https://www.googleapis.com/youtube/v3/search', {
       params: {
         part: 'snippet',
         q,
@@ -31,7 +62,7 @@ export default defineEventHandler(async (event) => {
     })
 
     return {
-      items: response.items.map((item: any) => ({
+      items: response.items.map((item: YouTubeSearchItem) => ({
         id: { videoId: item.id.videoId },
         snippet: {
           title: item.snippet.title,
@@ -40,10 +71,10 @@ export default defineEventHandler(async (event) => {
         }
       }))
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('YouTube API Error:', error)
     throw createError({
-      statusCode: error?.response?.status || 500,
+      statusCode: (error as { response?: { status?: number } })?.response?.status || 500,
       statusMessage: 'Failed to search YouTube videos'
     })
   }

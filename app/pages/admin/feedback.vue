@@ -55,7 +55,7 @@ async function fetchFeedback() {
 
     // Mark unread feedback as read
     const unreadIds = feedbacks.value
-      .filter((f: any) => !f.is_read)
+      .filter(f => !f.is_read)
       .map(f => f.id)
 
     if (unreadIds.length > 0) {
@@ -66,11 +66,11 @@ async function fetchFeedback() {
 
       if (updateError) console.error('Error marking feedback as read:', updateError)
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error fetching feedback:', error)
     toast.add({
       title: 'Error loading feedback',
-      description: error.message,
+      description: (error as Error).message,
       color: 'error'
     })
   } finally {

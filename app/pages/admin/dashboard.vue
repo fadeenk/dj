@@ -54,10 +54,10 @@ async function fetchEvents() {
     if (error) throw error
     if (error) throw error
     events.value = (data as unknown as Event[]) || []
-  } catch (error: any) {
+  } catch (error: unknown) {
     toast.add({
       title: 'Error fetching events',
-      description: error.message,
+      description: (error as Error).message,
       color: 'error'
     })
   } finally {
@@ -131,11 +131,11 @@ async function createEvent() {
       title: 'Event created',
       color: 'success'
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Event creation error:', error)
     toast.add({
       title: 'Error creating event',
-      description: error.message,
+      description: (error as Error).message,
       color: 'error'
     })
   } finally {
@@ -158,10 +158,10 @@ async function toggleEventStatus(event: Event) {
       title: 'Status updated',
       color: 'success'
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     toast.add({
       title: 'Error updating status',
-      description: error.message,
+      description: (error as Error).message,
       color: 'error'
     })
   }
@@ -184,10 +184,10 @@ async function deleteEvent(id: string) {
       title: 'Event deleted',
       color: 'success'
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     toast.add({
       title: 'Error deleting event',
-      description: error.message,
+      description: (error as Error).message,
       color: 'error'
     })
   }

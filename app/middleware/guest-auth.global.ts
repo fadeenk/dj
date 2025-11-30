@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((_to, _from) => {
   if (import.meta.server) return
 
   const guestId = ref(localStorage.getItem('guestUserId'))

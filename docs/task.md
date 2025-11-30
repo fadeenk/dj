@@ -47,8 +47,10 @@
     - [x] Fix UI colors and ensure it works in both light and dark modes and layout
     - [x] Apply Mobile-first responsive design
     - [x] Add animations and transitions
-    - [ ] Fix typing errors
-    - [ ] Bug fixes
+    - [x] Fix typing errors
+    - [ ] Remove server dependency
+    - [ ] Cleanup docs and create agents.md
+    - [ ] Setup treafik
 
 - [ ] **Phase 8: Integrate MeTube**
   - [ ] Integrate MeTube to automatically start downloading the video when the request is submitted

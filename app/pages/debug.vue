@@ -2,7 +2,7 @@
 const supabase = useSupabaseClient()
 const logs = ref<string[]>([])
 
-function log(msg: string, data?: any) {
+function log(msg: string, data?: object | null) {
   const line = `${new Date().toISOString()} - ${msg} ${data ? JSON.stringify(data, null, 2) : ''}`
   logs.value.push(line)
   console.log(msg, data)
@@ -48,27 +48,6 @@ async function runDebug() {
 
   log('DJ Record:', djData)
   if (djError) log('DJ Error:', djError)
-
-  // 5. Try Insert Event
-  const eventData = {
-    name: 'Debug Event ' + Date.now(),
-    code: 'DBG' + Date.now(),
-    date: new Date().toISOString().split('T')[0],
-    is_active: true,
-    dj_id: userData.user.id
-  }
-  log('Attempting Insert:', eventData)
-
-  const { data: insertData, error: insertError } = await supabase
-    .from('events')
-    .insert(eventData)
-    .select()
-
-  if (insertError) {
-    log('INSERT FAILED:', insertError)
-  } else {
-    log('INSERT SUCCESS:', insertData)
-  }
 }
 
 onMounted(() => {

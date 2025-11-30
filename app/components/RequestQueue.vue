@@ -181,7 +181,6 @@ async function handleVote(id: string) {
       if (error) throw error
     } else {
       // Add vote - use RPC to increment
-      // @ts-expect-error - RPC function not yet in types
       const { error } = await supabase.rpc('increment_upvotes', { row_id: id })
       if (error) throw error
     }

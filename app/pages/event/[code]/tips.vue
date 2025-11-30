@@ -71,11 +71,6 @@ const paymentMethods = [
   }
 ]
 
-// Handle back navigation
-function goBack() {
-  router.push(`/event/${code}`)
-}
-
 // Get DJ display name
 const djName = computed(() => {
   return event.value?.djs?.username || 'DJ'
