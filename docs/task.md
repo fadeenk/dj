@@ -46,7 +46,7 @@
     - [x] Header should not show menu Icon
     - [x] Fix UI colors and ensure it works in both light and dark modes and layout
     - [x] Apply Mobile-first responsive design
-    - [ ] Add animations and transitions
+    - [x] Add animations and transitions
     - [ ] Fix typing errors
     - [ ] Bug fixes
 

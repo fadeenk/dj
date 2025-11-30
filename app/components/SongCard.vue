@@ -23,6 +23,13 @@ const statusColors = {
 
 const isVoting = ref(false)
 
+const animationDelay = computed(() => {
+  if (!props.request?.id) return '0s'
+  // Use the last 4 characters of the UUID for a pseudo-random seed
+  const seed = parseInt(props.request.id.slice(-4), 16) || 0
+  return `-${seed % 4000}ms`
+})
+
 async function handleVote() {
   if (props.isAdmin || isVoting.value) return
   isVoting.value = true
@@ -34,7 +41,7 @@ async function handleVote() {
 </script>
 
 <template>
-  <div class="gradient-border-wrapper">
+  <div class="gradient-border-wrapper" :style="{ animationDelay }">
     <div class="relative flex flex-col gap-3 rounded-xl bg-white/5 p-4 transition-all hover:bg-white/10">
       <div class="flex items-start gap-4">
         <!-- Thumbnail -->
@@ -157,7 +164,7 @@ async function handleVote() {
   </div>
 </template>
 
-<style scoped>
+<style>
 .gradient-border-wrapper {
   position: relative;
   border-radius: 0.75rem; /* rounded-xl */
