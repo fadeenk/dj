@@ -1,23 +1,17 @@
-![Designs](https://stitch.withgoogle.com/projects/5964593768231122250?pli=1)
+[Designs](https://stitch.withgoogle.com/projects/5964593768231122250?pli=1)
+
+## Testing credentials
+Use these credentials 
+Email: fadeekannah@gmail.com
+Password: test123
+
+## Supabase Password
+M29kCxh18piFJjmY
 
 # Nuxt Starter Template
-
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
-
 Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
 
-- [Live demo](https://starter-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
-
-<a href="https://starter-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-  </picture>
-</a>
-
-> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue.
+[Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
 
 ## Quick Start
 
@@ -25,23 +19,12 @@ Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
 npm create nuxt@latest -- -t github:nuxt-ui-templates/starter
 ```
 
-## Deploy your own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
-
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
 ```
 
 ## Supabase Development
@@ -54,9 +37,9 @@ yarn install
     ```bash
     npx supabase start
     ```
-3.  Link to remote project (Project ID: `crdigodfxazwewymkdud`):
+3.  Link to remote project (Project ID: `qrtvoeowaoxasaayrert`):
     ```bash
-    npx supabase link --project-ref crdigodfxazwewymkdud
+    npx supabase link --project-ref qrtvoeowaoxasaayrert
     ```
 4.  Generate types:
     ```bash

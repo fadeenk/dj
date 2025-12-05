@@ -1,4 +1,35 @@
 <script setup lang="ts">
+interface YouTubeThumbnail {
+  url: string
+  width: number
+  height: number
+}
+
+interface YouTubeThumbnails {
+  default: YouTubeThumbnail
+  medium: YouTubeThumbnail
+  high: YouTubeThumbnail
+}
+
+interface YouTubeVideoSnippet {
+  title: string
+  channelTitle: string
+  thumbnails: YouTubeThumbnails
+}
+
+interface YouTubeVideoId {
+  videoId: string
+}
+
+interface YouTubeSearchItem {
+  id: YouTubeVideoId
+  snippet: YouTubeVideoSnippet
+}
+
+interface YouTubeSearchResponse {
+  items: YouTubeSearchItem[]
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   eventId: string
@@ -14,12 +45,11 @@ const emit = defineEmits<{
   (e: 'cancel'): void
 }>()
 
+const config = useRuntimeConfig()
 const searchQuery = ref('')
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const searchResults = ref<any[]>([])
+const searchResults = ref<YouTubeSearchItem[]>([])
 const searching = ref(false)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedVideo = ref<any | null>(null)
+const selectedVideo = ref<YouTubeSearchItem | null>(null)
 const userComment = ref('')
 
 // Debounce search
@@ -34,21 +64,36 @@ const handleSearch = () => {
   searchTimeout = setTimeout(async () => {
     searching.value = true
     try {
-      const { data } = await useFetch('/api/youtube/search', {
-        params: { q: searchQuery.value }
+      // Call YouTube API directly from client
+      const response = await $fetch<YouTubeSearchResponse>('https://www.googleapis.com/youtube/v3/search', {
+        params: {
+          part: 'snippet',
+          q: searchQuery.value,
+          type: 'video',
+          key: config.public.youtubeApiKey,
+          order: 'viewCount',
+          maxResults: 30
+        }
       })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      searchResults.value = (data.value as any)?.items || []
+
+      searchResults.value = response.items.map((item: YouTubeSearchItem) => ({
+        id: { videoId: item.id.videoId },
+        snippet: {
+          title: item.snippet.title,
+          channelTitle: item.snippet.channelTitle,
+          thumbnails: item.snippet.thumbnails
+        }
+      }))
     } catch (e) {
-      console.error('Search error', e)
+      console.error('YouTube API Error:', e)
+      searchResults.value = []
     } finally {
       searching.value = false
     }
   }, 500)
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function selectVideo(video: any) {
+function selectVideo(video: YouTubeSearchItem) {
   selectedVideo.value = video
   searchResults.value = [] // Clear results to show selection UI
 }

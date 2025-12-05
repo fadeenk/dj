@@ -17,7 +17,9 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
-    youtubeApiKey: process.env.NUXT_YOUTUBE_API_KEY
+    public: {
+      youtubeApiKey: process.env.NUXT_YOUTUBE_API_KEY
+    }
   },
 
   routeRules: {
