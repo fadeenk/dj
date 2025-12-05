@@ -46,6 +46,7 @@ const emit = defineEmits<{
 }>()
 
 const config = useRuntimeConfig()
+const loading = ref(false)
 const searchQuery = ref('')
 const searchResults = ref<YouTubeSearchItem[]>([])
 const searching = ref(false)
@@ -98,15 +99,31 @@ function selectVideo(video: YouTubeSearchItem) {
   searchResults.value = [] // Clear results to show selection UI
 }
 
-function submitRequest() {
+async function submitRequest() {
   if (!selectedVideo.value) return
+  loading.value = true
 
-  emit('submit', {
-    song_title: selectedVideo.value.snippet.title,
-    song_artist: selectedVideo.value.snippet.channelTitle,
-    youtube_url: selectedVideo.value.id.videoId,
-    user_comment: userComment.value
+  const { status } = await useFetch('https://metube.mrkannah.com/add', {
+    method: 'POST',
+    body: {
+      url: 'https://www.youtube.com/watch?v=' + selectedVideo.value.id.videoId,
+      quality: 'best',
+      format: 'mp3',
+      playlist_strict_mode: false,
+      auto_start: true
+    }
   })
+
+  if (status.value === 'success') {
+    emit('submit', {
+      song_title: selectedVideo.value.snippet.title,
+      song_artist: selectedVideo.value.snippet.channelTitle,
+      youtube_url: selectedVideo.value.id.videoId,
+      user_comment: userComment.value
+    })
+  }
+
+  loading.value = false
 }
 </script>
 
@@ -176,6 +193,7 @@ function submitRequest() {
           label="Submit Request"
           variant="rounded"
           size="md"
+          :loading="loading"
           @click="submitRequest"
         />
       </div>

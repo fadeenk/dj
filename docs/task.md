@@ -53,8 +53,9 @@
     - [x] Setup treafik
 
 - [ ] **Phase 8: Integrate MeTube**
-  - [ ] Integrate MeTube to automatically start downloading the video when the request is submitted
-  - [ ] Setup syncthing
+  - [x] Integrate MeTube to automatically start downloading the video when the request is submitted
+  - [ ] Setup syncing use one drive?
+  - [ ] Send to whatever her name is
 
 
 - [ ] **Phase 9: Future Enhancements**
