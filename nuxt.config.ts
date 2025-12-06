@@ -20,7 +20,11 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
-      youtubeApiKey: process.env.NUXT_YOUTUBE_API_KEY
+      youtubeApiKey: process.env.NUXT_YOUTUBE_API_KEY,
+      supabase: {
+        url: process.env.NUXT_SUPABASE_URL,
+        key: process.env.NUXT_SUPABASE_KEY
+      }
     }
   },
 
@@ -45,8 +49,6 @@ export default defineNuxtConfig({
     }
   },
   supabase: {
-    url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_KEY,
     redirect: false,
     types: '~/types/database.types.ts'
   }
