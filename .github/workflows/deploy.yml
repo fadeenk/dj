@@ -20,6 +20,8 @@ jobs:
               env:
                   NUXT_SUPABASE_URL: ${{ secrets.NUXT_SUPABASE_URL }}
                   NUXT_SUPABASE_KEY: ${{ secrets.NUXT_SUPABASE_KEY }}
+                  SUPABASE_URL: ${{ secrets.NUXT_SUPABASE_URL }}
+                  SUPABASE_KEY: ${{ secrets.NUXT_SUPABASE_KEY }}
                   NUXT_YOUTUBE_API_KEY: ${{ secrets.NUXT_YOUTUBE_API_KEY }}
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3

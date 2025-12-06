@@ -1,4 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+console.log('Checking Env Vars on Build Start:')
+console.log('NUXT_SUPABASE_URL:', process.env.NUXT_SUPABASE_URL ? 'Present' : 'Missing')
+console.log('NUXT_SUPABASE_KEY:', process.env.NUXT_SUPABASE_KEY ? 'Present' : 'Missing')
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? 'Present' : 'Missing')
+console.log('SUPABASE_KEY:', process.env.SUPABASE_KEY ? 'Present' : 'Missing')
+
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/hints', '@nuxtjs/supabase'],
 
@@ -22,8 +28,8 @@ export default defineNuxtConfig({
     public: {
       youtubeApiKey: process.env.NUXT_YOUTUBE_API_KEY,
       supabase: {
-        url: process.env.NUXT_SUPABASE_URL,
-        key: process.env.NUXT_SUPABASE_KEY
+        url: process.env.NUXT_SUPABASE_URL ?? process.env.SUPABASE_URL,
+        key: process.env.NUXT_SUPABASE_KEY ?? process.env.SUPABASE_KEY
       }
     }
   },
@@ -49,6 +55,8 @@ export default defineNuxtConfig({
     }
   },
   supabase: {
+    url: process.env.NUXT_SUPABASE_URL ?? process.env.SUPABASE_URL,
+    key: process.env.NUXT_SUPABASE_KEY ?? process.env.SUPABASE_KEY,
     redirect: false,
     types: '~/types/database.types.ts'
   }
