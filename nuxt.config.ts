@@ -2,6 +2,8 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/hints', '@nuxtjs/supabase'],
 
+  ssr: false,
+
   devtools: {
     enabled: true
   },
@@ -25,8 +27,14 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true }
   },
-
   compatibilityDate: '2025-01-15',
+
+  nitro: {
+    prerender: {
+      routes: ['/'],
+      crawlLinks: true
+    }
+  },
 
   eslint: {
     config: {
