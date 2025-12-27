@@ -171,7 +171,7 @@ onMounted(() => {
               v-if="event.djs?.username"
               class="mt-1 text-base font-normal text-primary"
             >
-              with DJ {{ event.djs.username }}
+              with {{ event.djs.username }}
             </p>
           </div>
 
@@ -243,6 +243,24 @@ onMounted(() => {
             <p class="text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
               {{ event.description }}
             </p>
+          </div>
+
+          <!-- Meet the DJ -->
+          <div class="flex flex-col gap-2 rounded-lg bg-gray-100 p-4 dark:bg-white/5">
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+              About the DJ
+            </h3>
+            <p class="text-sm font-normal leading-normal text-gray-600 dark:text-white/70">
+              Your DJ tonight is currently single. If you’re curious to know more, feel free to visit his profile! Otherwise, enjoy the celebration! 🎉
+            </p>
+            <UButton
+              to="https://mrkannah.com/datingProfile"
+              target="_blank"
+              color="primary"
+              variant="solid"
+              label="View Profile"
+              class="w-fit"
+            />
           </div>
 
           <!-- House Rules -->
