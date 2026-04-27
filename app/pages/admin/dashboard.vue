@@ -65,7 +65,7 @@ function openEditModal(event: Event) {
   editingEventId.value = event.id
   const startDate = new Date(event.start_time)
   const endDate = event.end_time ? new Date(event.end_time) : new Date(startDate)
-  
+
   eventForm.value = {
     name: event.name,
     code: event.code,
@@ -128,7 +128,7 @@ async function submitEvent() {
       house_rules: eventForm.value.house_rules || null
     }
 
-    if (isEditing.value) {
+    if (editingEventId.value) {
       const { data, error } = await supabase
         .from('events')
         .update(eventData)
@@ -142,7 +142,7 @@ async function submitEvent() {
       if (index !== -1) {
         events.value[index] = data as unknown as Event
       }
-      
+
       toast.add({
         title: 'Event updated',
         color: 'success'
