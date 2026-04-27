@@ -37,9 +37,9 @@ npm install
     ```bash
     npx supabase start
     ```
-3.  Link to remote project (Project ID: `qrtvoeowaoxasaayrert`):
+3.  Link to remote project (Project ID: `stiyhwnvvjdvgoburvfo`):
     ```bash
-    npx supabase link --project-ref qrtvoeowaoxasaayrert
+    npx supabase link --project-ref stiyhwnvvjdvgoburvfo
     ```
 4.  Generate types:
     ```bash

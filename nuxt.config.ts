@@ -2,7 +2,7 @@
 console.log('Checking Env Vars on Build Start:')
 console.log('NUXT_SUPABASE_URL:', process.env.NUXT_SUPABASE_URL ? 'Present' : 'Missing')
 console.log('NUXT_SUPABASE_KEY:', process.env.NUXT_SUPABASE_KEY ? 'Present' : 'Missing')
-console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? 'Present' : 'Missing')
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL)
 console.log('SUPABASE_KEY:', process.env.SUPABASE_KEY ? 'Present' : 'Missing')
 
 export default defineNuxtConfig({
