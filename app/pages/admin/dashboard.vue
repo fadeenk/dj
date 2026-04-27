@@ -25,11 +25,15 @@ interface Event {
 // State
 const events = ref<Event[]>([])
 const loading = ref(true)
-const isCreateModalOpen = ref(false)
+const isModalOpen = ref(false)
 const isQrModalOpen = ref(false)
 const qrCodeUrl = ref('')
 const selectedEvent = ref<Event | null>(null)
-const newEvent = ref({
+const editingEventId = ref<string | null>(null)
+const isEditing = computed(() => !!editingEventId.value)
+const submitting = ref(false)
+
+const eventForm = ref({
   name: '',
   code: '',
   date: new Date().toISOString().split('T')[0],
@@ -40,7 +44,41 @@ const newEvent = ref({
   description: '',
   house_rules: ''
 })
-const creating = ref(false)
+
+function openCreateModal() {
+  editingEventId.value = null
+  eventForm.value = {
+    name: '',
+    code: '',
+    date: new Date().toISOString().split('T')[0],
+    is_active: true,
+    location: '',
+    start_time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+    end_time: '23:59',
+    description: '',
+    house_rules: ''
+  }
+  isModalOpen.value = true
+}
+
+function openEditModal(event: Event) {
+  editingEventId.value = event.id
+  const startDate = new Date(event.start_time)
+  const endDate = event.end_time ? new Date(event.end_time) : new Date(startDate)
+  
+  eventForm.value = {
+    name: event.name,
+    code: event.code,
+    date: startDate.toISOString().split('T')[0],
+    is_active: event.is_active ?? true,
+    location: event.location || '',
+    start_time: startDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+    end_time: endDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+    description: event.description || '',
+    house_rules: event.house_rules || ''
+  }
+  isModalOpen.value = true
+}
 
 // Fetch events
 async function fetchEvents() {
@@ -65,25 +103,13 @@ async function fetchEvents() {
   }
 }
 
-// Create event
-async function createEvent() {
-  creating.value = true
+// Submit event (Create or Update)
+async function submitEvent() {
+  submitting.value = true
   try {
-    console.log('--- DEBUG EVENT CREATION ---')
-
-    // Get user ID from session directly (more reliable than user.value)
-    const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
-
-    if (sessionError || !sessionData.session) {
-      throw new Error('Could not get user session')
-    }
-
-    const userId = sessionData.session.user.id
-    console.log('User ID from session:', userId)
-
     // Combine date and time
-    const startDateTime = new Date(`${newEvent.value.date}T${newEvent.value.start_time}`)
-    const endDateTime = new Date(`${newEvent.value.date}T${newEvent.value.end_time}`)
+    const startDateTime = new Date(`${eventForm.value.date}T${eventForm.value.start_time}`)
+    const endDateTime = new Date(`${eventForm.value.date}T${eventForm.value.end_time}`)
 
     // Handle next day logic
     if (endDateTime < startDateTime) {
@@ -92,54 +118,64 @@ async function createEvent() {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const eventData: any = {
-      name: newEvent.value.name,
-      code: newEvent.value.code,
-      is_active: newEvent.value.is_active,
-      dj_id: userId,
-      location: newEvent.value.location || null,
+      name: eventForm.value.name,
+      code: eventForm.value.code,
+      is_active: eventForm.value.is_active,
+      location: eventForm.value.location || null,
       start_time: startDateTime.toISOString(),
       end_time: endDateTime.toISOString(),
-      description: newEvent.value.description || null,
-      house_rules: newEvent.value.house_rules || null
+      description: eventForm.value.description || null,
+      house_rules: eventForm.value.house_rules || null
     }
 
-    console.log('Payload:', eventData)
-    console.log('----------------------------')
+    if (isEditing.value) {
+      const { data, error } = await supabase
+        .from('events')
+        .update(eventData)
+        .eq('id', editingEventId.value)
+        .select()
+        .single()
 
-    const { data, error } = await supabase
-      .from('events')
-      .insert(eventData)
-      .select()
-      .single()
+      if (error) throw error
 
-    if (error) throw error
+      const index = events.value.findIndex(e => e.id === editingEventId.value)
+      if (index !== -1) {
+        events.value[index] = data as unknown as Event
+      }
+      
+      toast.add({
+        title: 'Event updated',
+        color: 'success'
+      })
+    } else {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
+      if (sessionError || !sessionData.session) throw new Error('Could not get user session')
+      eventData.dj_id = sessionData.session.user.id
 
-    events.value.unshift(data as unknown as Event)
-    isCreateModalOpen.value = false
-    newEvent.value = {
-      name: '',
-      code: '',
-      date: new Date().toISOString().split('T')[0],
-      is_active: true,
-      location: '',
-      start_time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
-      end_time: '23:59',
-      description: '',
-      house_rules: ''
+      const { data, error } = await supabase
+        .from('events')
+        .insert(eventData)
+        .select()
+        .single()
+
+      if (error) throw error
+
+      events.value.unshift(data as unknown as Event)
+      toast.add({
+        title: 'Event created',
+        color: 'success'
+      })
     }
-    toast.add({
-      title: 'Event created',
-      color: 'success'
-    })
+    isModalOpen.value = false
   } catch (error: unknown) {
-    console.error('Event creation error:', error)
+    console.error('Event save error:', error)
     toast.add({
-      title: 'Error creating event',
+      title: `Error ${isEditing.value ? 'updating' : 'creating'} event`,
       description: (error as Error).message,
       color: 'error'
     })
   } finally {
-    creating.value = false
+    submitting.value = false
   }
 }
 
@@ -316,7 +352,7 @@ onMounted(() => {
           icon="i-heroicons-plus"
           color="primary"
           label="Create Event"
-          @click="isCreateModalOpen = true"
+          @click="openCreateModal"
         />
       </div>
     </div>
@@ -371,6 +407,13 @@ onMounted(() => {
                 @click="showQrCode(event)"
               />
               <UButton
+                icon="i-heroicons-pencil-square"
+                color="neutral"
+                variant="ghost"
+                title="Edit"
+                @click="openEditModal(event)"
+              />
+              <UButton
                 :icon="event.is_active ? 'i-heroicons-pause' : 'i-heroicons-play'"
                 color="neutral"
                 variant="ghost"
@@ -404,23 +447,23 @@ onMounted(() => {
       </UCard>
     </div>
 
-    <!-- Create Event Modal -->
+    <!-- Create / Edit Event Modal -->
     <UModal
-      v-model:open="isCreateModalOpen"
-      title="Create New Event"
+      v-model:open="isModalOpen"
+      :title="isEditing ? 'Edit Event' : 'Create New Event'"
     >
       <template #body>
         <form
-          id="create-event-form"
+          id="event-form"
           class="space-y-4"
-          @submit.prevent="createEvent"
+          @submit.prevent="submitEvent"
         >
           <UFormField
             label="Event Name"
             required
           >
             <UInput
-              v-model="newEvent.name"
+              v-model="eventForm.name"
               placeholder="e.g. Friday Night Party"
               required
             />
@@ -432,7 +475,7 @@ onMounted(() => {
             help="Unique code for guests to join"
           >
             <UInput
-              v-model="newEvent.code"
+              v-model="eventForm.code"
               placeholder="e.g. PARTY123"
               required
             />
@@ -443,7 +486,7 @@ onMounted(() => {
             required
           >
             <UInput
-              v-model="newEvent.date"
+              v-model="eventForm.date"
               type="date"
               required
             />
@@ -452,7 +495,7 @@ onMounted(() => {
           <div class="grid grid-cols-2 gap-4">
             <UFormField label="Start Time">
               <UInput
-                v-model="newEvent.start_time"
+                v-model="eventForm.start_time"
                 type="time"
                 placeholder="e.g. 21:00"
               />
@@ -460,7 +503,7 @@ onMounted(() => {
 
             <UFormField label="End Time">
               <UInput
-                v-model="newEvent.end_time"
+                v-model="eventForm.end_time"
                 type="time"
                 placeholder="e.g. 02:00"
               />
@@ -469,14 +512,14 @@ onMounted(() => {
 
           <UFormField label="Location">
             <UInput
-              v-model="newEvent.location"
+              v-model="eventForm.location"
               placeholder="e.g. The Void, 123 Electric Ave, Downtown"
             />
           </UFormField>
 
           <UFormField label="Description">
             <UTextarea
-              v-model="newEvent.description"
+              v-model="eventForm.description"
               placeholder="About the event..."
               :rows="3"
             />
@@ -487,7 +530,7 @@ onMounted(() => {
             help="One rule per line"
           >
             <UTextarea
-              v-model="newEvent.house_rules"
+              v-model="eventForm.house_rules"
               placeholder="Respect the vibe, respect each other.&#10;Song requests are welcome through the app.&#10;No outside drinks or food."
               :rows="4"
             />
@@ -495,8 +538,8 @@ onMounted(() => {
 
           <div class="flex items-center gap-2">
             <UCheckbox
-              v-model="newEvent.is_active"
-              label="Active immediately"
+              v-model="eventForm.is_active"
+              label="Active"
             />
           </div>
         </form>
@@ -507,17 +550,17 @@ onMounted(() => {
           <UButton
             color="neutral"
             variant="ghost"
-            @click="isCreateModalOpen = false"
+            @click="isModalOpen = false"
           >
             Cancel
           </UButton>
           <UButton
             type="submit"
-            form="create-event-form"
+            form="event-form"
             color="primary"
-            :loading="creating"
+            :loading="submitting"
           >
-            Create
+            {{ isEditing ? 'Save Changes' : 'Create' }}
           </UButton>
         </div>
       </template>
